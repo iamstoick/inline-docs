@@ -16,10 +16,7 @@ Links
 ----
 
 - every level-1 and level-2 heading becomes a link anchor.
-- linking to a level-1 heading: [[Docs]].  Renders as [Docs](./docs.md).
-- linking to a level-2 heading: [[Docs/How are docs generated?]]. Renders as [How are docs generated? (Docs)](./docs.md#how-are-docs-generated)
-- [[./How are docs generated?]] is a relative link to a level-2 heading within the current level-1 section. Renders as [How are docs generated?](./docs.md#how-are-docs-generated)
-
+- see also: [[Process a file][Find document links in comments]].
 
 Source references
 ----
@@ -41,25 +38,28 @@ var findit = require('findit');
 var path = require('path');
 var minimatchAll = require('minimatch-all');
 var processFile = require('./lib/process-file');
+var renderDocInfo = require('./lib/render-doc-info');
 
 var dir = __dirname;
 var finder = findit(dir);
 
+/*
+
+Locating source files
+----
+
+By default we locate all .js files in the project directory, except for those in the `node_modules` directory.
+
+*/
 var opts = {
   globs: [
-    // match .js and .md files
+    //> include .js files
     '**/*.js',
-    //'**/*.md',
 
-    // exclude node_modules
-    '!**/node_modules/**',
-
-    // include lib
-    '**/node_modules/lib/**'
+    //> exclude node_modules
+    '!**/node_modules/**'
   ]
 };
-
-var docs = [];
 
 finder.on('file', function (filename, stat) {
   if (minimatchAll(filename, opts.globs)) {
@@ -67,11 +67,7 @@ finder.on('file', function (filename, stat) {
       if (err) { throw err; }
       if (!info) { return; }
 
-      docs.push(info);
+      renderDocInfo(info, process.stdout.write.bind(process.stdout));
     });
   }
-});
-
-finder.on('end', function () {
-  process.stdout.write(JSON.stringify(docs) + '\n');
 });
