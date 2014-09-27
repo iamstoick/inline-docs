@@ -1,6 +1,6 @@
 /*
 
-Inline Docs
+Overview
 ====
 
 How are docs generated?
@@ -53,8 +53,9 @@ By default we locate all .js files in the project directory, except for those in
 */
 var opts = {
   globs: [
-    //> include .js files
+    //> include js and markdown files
     '**/*.js',
+    '**/*.{md,markdown}',
 
     //> exclude node_modules
     '!**/node_modules/**'
