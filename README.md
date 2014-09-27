@@ -20,6 +20,7 @@ Rules
 ----
 
 - to be considered valid, a source file must have exactly one level-1 heading.
+- single-line comments are only included if they begin with a `>` (eg. `//> comment goes here...`)
 
 
 Project goals
