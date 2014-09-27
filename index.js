@@ -61,13 +61,18 @@ var opts = {
   ]
 };
 
+var writeToStdout = true;
+var writeFunc = writeToStdout ?
+    process.stdout.write.bind(process.stdout) :
+    function () {};
+
 finder.on('file', function (filename, stat) {
   if (minimatchAll(filename, opts.globs)) {
     processFile(filename, function (err, info) {
       if (err) { throw err; }
       if (!info) { return; }
 
-      renderDocInfo(info, process.stdout.write.bind(process.stdout));
+      renderDocInfo(info, writeFunc);
     });
   }
 });
