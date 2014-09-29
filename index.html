@@ -32,34 +32,17 @@
               padding: 10px 0 10px 40px;
               margin: 0;
             }
-
-            .source-ref {
-              padding: 0 0 10px 0;
-              font-size: 12px;
-              font-style: italic;
-              color: #999;
-            }
-
-            .source-ref a {
-              color: #999;
-              text-decoration: none;
-            }
-
-            .source-ref a:hover {
-              text-decoration: underline;
-            }
         </style>
     </head>
     <body>
-        <section data-filename="README.md">
+        <section data-filename="/Users/josh/projects/personal/inline-docs/README.md">
 <article data-line="0">
 <h1 id="inline-docs">Inline Docs</h1><p>Embed markdown documentation in code.</p>
 <h2 id="inline-docs:install">Install</h2><p><code>npm install -g inline-docs</code></p>
 <h2 id="inline-docs:usage">Usage</h2><p>Run <code>inline-docs</code> in your project&#39;s root directory.</p>
 <h2 id="inline-docs:rules">Rules</h2><ul>
-<li>To be considered valid, a source file must have exactly one level-1 heading in the markdown portion.</li>
-<li>Any comments before the level-1 heading are ignored.</li>
-<li>Single-line comments are only included if they begin with a <code>&gt;</code> (eg. <code>//&gt; comment goes here...</code>)</li>
+<li>to be considered valid, a source file must have exactly one level-1 heading.</li>
+<li>single-line comments are only included if they begin with a <code>&gt;</code> (eg. <code>//&gt; comment goes here...</code>)</li>
 </ul>
 <h2 id="inline-docs:project-goals">Project goals</h2><p>There are many existing tools to help you generate documentation from code, but most of them are geared towards describing APIs. Put more generally, the tools and documentation are focussed on <em>what</em> the code is doing and <em>how</em> to properly call each function. This is useful, but a lot of the time we need to document <em>why</em> things were done in a certain way. Every design-decision and tradeoff made today impacts the possible decisions that can be made tomorrow, and this information is critical to new developers becoming involved in the project.</p>
 <p>Along with this, <code>inline-docs</code> has the following goals:</p>
@@ -70,9 +53,9 @@
 </ul>
 <h2 id="inline-docs:license">License</h2><p>MIT</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/README.md#L0">README.md, line 0</a></div></article>
+</article>
 </section>
-<section data-filename="index.js">
+<section data-filename="/Users/josh/projects/personal/inline-docs/index.js">
 <article data-line="1">
 <h1 id="overview">Overview</h1><h2 id="overview:how-are-docs-generated-">How are docs generated?</h2><ul>
 <li>source files are parsed to extract comments, which are combined to form a markdown document.</li>
@@ -94,51 +77,28 @@
 <li>drop all tokens preceding the level-1 heading.</li>
 </ul>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/index.js#L1">index.js, line 1</a></div></article>
+</article>
 <article data-line="47">
 <h2 id="overview:locating-source-files">Locating source files</h2><p>By default we locate all .js files in the project directory, except for those in the <code>node_modules</code> directory.</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/index.js#L47">index.js, line 47</a></div></article>
+</article>
 <article data-line="57">
 <blockquote>
 <p>include js and markdown files</p>
 </blockquote>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/index.js#L57">index.js, line 57</a></div></article>
+</article>
 <article data-line="61">
 <blockquote>
 <p>exclude node_modules</p>
 </blockquote>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/index.js#L61">index.js, line 61</a></div></article>
+</article>
 </section>
-<section data-filename="lib/exclude-pre-heading-markdown-tokens.js">
-<article data-line="1">
-<h1 id="exclude-pre-heading-markdown-tokens">Exclude pre-heading markdown tokens</h1><p>Every doc is expected to begin with a level-1 heading, so anything  before this is ignored.</p>
-<p>It&#39;s common to see metadata comments near the top of a file which we wouldn&#39;t want to include. Also, expecting a level-1 markdown heading gives the developer a natural way to opt-in so we&#39;re not creating nonsense-documentatation for files that weren&#39;t intended to use comments in this way.</p>
-
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/exclude-pre-heading-markdown-tokens.js#L1">lib/exclude-pre-heading-markdown-tokens.js, line 1</a></div></article>
-<article data-line="12">
-<h2 id="exclude-pre-heading-markdown-tokens:determine-whether-a-token-is-a-level-1-heading">Determine whether a token is a Level-1 Heading</h2><p>Inputs:</p>
-<ul>
-<li>MarkdownToken</li>
-</ul>
-<p>Output: boolean</p>
-
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/exclude-pre-heading-markdown-tokens.js#L12">lib/exclude-pre-heading-markdown-tokens.js, line 12</a></div></article>
-<article data-line="27">
-<h2 id="exclude-pre-heading-markdown-tokens:module-interface">Module interface</h2><p>Inputs:</p>
-<ul>
-<li>DocItem[]</li>
-</ul>
-<p>Output: DocItem[]</p>
-
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/exclude-pre-heading-markdown-tokens.js#L27">lib/exclude-pre-heading-markdown-tokens.js, line 27</a></div></article>
-</section>
-<section data-filename="lib/find-comments.js">
+<section data-filename="/Users/josh/projects/personal/inline-docs/lib/find-comments.js">
 <article data-line="12">
 <h1 id="find-comments-in-source-code">Find comments in source code</h1>
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L12">lib/find-comments.js, line 12</a></div></article>
+</article>
 <article data-line="19">
 <h2 id="find-comments-in-source-code:zeroing-comment-indentation">Zeroing comment indentation</h2><p>Often a comment will be indented, so we need to make sure that doesn&#39;t affect the markdown interpretation.</p>
 <p>We&#39;ll assume that the leading whitespace on the first non-empty line represents the indentation applied to all lines. We can subtract this from all lines to zero the indentation.</p>
@@ -148,13 +108,13 @@
 </ul>
 <p>Output: CommentToken</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L19">lib/find-comments.js, line 19</a></div></article>
+</article>
 <article data-line="41">
 <blockquote>
 <p>don&#39;t consider empty lines as they are not a reliable indication of indentation</p>
 </blockquote>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L41">lib/find-comments.js, line 41</a></div></article>
+</article>
 <article data-line="58">
 <h2 id="find-comments-in-source-code:convert-a-comment-to-a-doc-item">Convert a comment to a doc item</h2><p>Inputs</p>
 <ul>
@@ -162,7 +122,7 @@
 </ul>
 <p>Output: DocItem</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L58">lib/find-comments.js, line 58</a></div></article>
+</article>
 <article data-line="77">
 <h2 id="find-comments-in-source-code:extract-comments-from-a-javascript-file">Extract comments from a javascript file</h2><p>We use a javascript parser to locate all comments, along with their text and location in the file.</p>
 <p>Inputs:</p>
@@ -171,7 +131,7 @@
 </ul>
 <p>Output: CommentToken[]</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L77">lib/find-comments.js, line 77</a></div></article>
+</article>
 <article data-line="100">
 <h2 id="find-comments-in-source-code:determine-whether-a-comment-is-included">Determine whether a comment is included</h2><p>Inputs:</p>
 <ul>
@@ -179,13 +139,13 @@
 </ul>
 <p>Output: boolean</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L100">lib/find-comments.js, line 100</a></div></article>
+</article>
 <article data-line="115">
 <blockquote>
 <p>single-line comments are only included if they begin with a <code>&gt;</code> (see <a class="doc-link" href="#inline-docs:rules">Inline Docs&rarr;Rules</a>)</p>
 </blockquote>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L115">lib/find-comments.js, line 115</a></div></article>
+</article>
 <article data-line="119">
 <h2 id="find-comments-in-source-code:module-interface">Module Interface</h2><p>Inputs:</p>
 <ul>
@@ -194,13 +154,36 @@
 <p>Output: DocItem[]</p>
 <p>See also:</p>
 <ul>
-<li><a class="doc-link" href="#overview">Overview</a> and <a class="doc-link" href="#overview:how-are-docs-generated-">Overview&rarr;How are docs generated?</a></li>
+<li><a class="doc-link" href="#overview">Overview</a> and <a class="doc-link" href="#overview:how-are-documents-generated-">Overview&rarr;How are documents generated?</a></li>
 <li><a class="doc-link" href="#exclude-pre-heading-markdown-tokens">Exclude pre-heading markdown tokens</a></li>
 </ul>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/find-comments.js#L119">lib/find-comments.js, line 119</a></div></article>
+</article>
 </section>
-<section data-filename="lib/get-heading-id.js">
+<section data-filename="/Users/josh/projects/personal/inline-docs/lib/exclude-pre-heading-markdown-tokens.js">
+<article data-line="1">
+<h1 id="exclude-pre-heading-markdown-tokens">Exclude pre-heading markdown tokens</h1><p>Every doc is expected to begin with a level-1 heading, so anything  before this is ignored.</p>
+<p>It&#39;s common to see metadata comments near the top of a file which we wouldn&#39;t want to include. Also, expecting a level-1 markdown heading gives the developer a natural way to opt-in so we&#39;re not creating nonsense-documentatation for files that weren&#39;t intended to use comments in this way.</p>
+
+</article>
+<article data-line="12">
+<h2 id="exclude-pre-heading-markdown-tokens:determine-whether-a-token-is-a-level-1-heading">Determine whether a token is a Level-1 Heading</h2><p>Inputs:</p>
+<ul>
+<li>MarkdownToken</li>
+</ul>
+<p>Output: boolean</p>
+
+</article>
+<article data-line="27">
+<h2 id="exclude-pre-heading-markdown-tokens:module-interface">Module interface</h2><p>Inputs:</p>
+<ul>
+<li>DocItem[]</li>
+</ul>
+<p>Output: DocItem[]</p>
+
+</article>
+</section>
+<section data-filename="/Users/josh/projects/personal/inline-docs/lib/get-heading-id.js">
 <article data-line="1">
 <h1 id="creating-heading-anchors">Creating heading anchors</h1><p>Each level-1 and level-2 heading can be linked to. We create a unique anchor ID by converting the heading text into a suitable format.</p>
 <h2 id="creating-heading-anchors:module-interface">Module Interface</h2><p>Inputs:</p>
@@ -209,14 +192,14 @@
 </ul>
 <p>Output: HeadingId</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/get-heading-id.js#L1">lib/get-heading-id.js, line 1</a></div></article>
+</article>
 </section>
-<section data-filename="lib/process-file.js">
+<section data-filename="/Users/josh/projects/personal/inline-docs/lib/process-file.js">
 <article data-line="1">
 <h1 id="process-a-file">Process a file</h1><p>To process source files we extract comments and parse as markdown.</p>
 <p>To process markdown files we treat them as one big comment, so that the data format is consistent.</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/process-file.js#L1">lib/process-file.js, line 1</a></div></article>
+</article>
 <article data-line="17">
 <h2 id="process-a-file:determine-whether-a-token-is-a-level-2-heading">Determine whether a token is a Level-2 heading</h2><p>Inputs:</p>
 <ul>
@@ -224,7 +207,7 @@
 </ul>
 <p>Output: boolean</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/process-file.js#L17">lib/process-file.js, line 17</a></div></article>
+</article>
 <article data-line="32">
 <h2 id="process-a-file:find-all-level-2-headings">Find all Level-2 headings</h2><p>Inputs:</p>
 <ul>
@@ -232,7 +215,7 @@
 </ul>
 <p>Output: string[]</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/process-file.js#L32">lib/process-file.js, line 32</a></div></article>
+</article>
 <article data-line="51">
 <h2 id="process-a-file:find-document-links-in-comments">Find document links in comments</h2><ul>
 <li>linking to a level-1 heading: <code><a class="doc-link" href="#overview">Overview</a></code>.  Renders as <a href="#overview">Overview</a>.</li>
@@ -245,7 +228,7 @@
 </ul>
 <p>Output: string[]</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/process-file.js#L51">lib/process-file.js, line 51</a></div></article>
+</article>
 <article data-line="113">
 <h2 id="process-a-file:module-interface">Module interface</h2><p>Inputs:</p>
 <ul>
@@ -253,9 +236,9 @@
 <li>callback: function (error | null, FileInfo)</li>
 </ul>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/process-file.js#L113">lib/process-file.js, line 113</a></div></article>
+</article>
 </section>
-<section data-filename="lib/render-doc-info.js">
+<section data-filename="/Users/josh/projects/personal/inline-docs/lib/render-doc-info.js">
 <article data-line="1">
 <h1 id="rendering-the-document">Rendering the document</h1><p>After extracting comments we need to put it all together. The end result will be:</p>
 <ul>
@@ -265,41 +248,35 @@
 <li>before converting markdown to html we also replace special &quot;Doc Links&quot; with the markdown equivalent.</li>
 </ul>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/render-doc-info.js#L1">lib/render-doc-info.js, line 1</a></div></article>
-<article data-line="32">
+</article>
+<article data-line="31">
 <h2 id="rendering-the-document:rendering-a-document-link">Rendering a document link</h2><p>Inputs:</p>
 <ul>
 <li>DocLink</li>
 </ul>
 <p>Output: HtmlString</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/render-doc-info.js#L32">lib/render-doc-info.js, line 32</a></div></article>
-<article data-line="44">
+</article>
+<article data-line="43">
 <blockquote>
 <p>split level-1 and level-2 parts</p>
 </blockquote>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/render-doc-info.js#L44">lib/render-doc-info.js, line 44</a></div></article>
-<article data-line="54">
+</article>
+<article data-line="53">
 <h2 id="rendering-the-document:replacing-document-link-placeholders-with-hyperlinks">Replacing document link placeholders with hyperlinks</h2><p>Inputs:</p>
 <ul>
 <li>HtmlString</li>
 </ul>
 <p>Output: HtmlString</p>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/render-doc-info.js#L54">lib/render-doc-info.js, line 54</a></div></article>
-<article data-line="66">
+</article>
+<article data-line="65">
 <blockquote>
 <p>placeholders with a preceding backtick are ignored.</p>
 </blockquote>
 
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/render-doc-info.js#L66">lib/render-doc-info.js, line 66</a></div></article>
-<article data-line="112">
-<blockquote>
-<p>display a reference to the source code this comment comes from.</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="https://github.com/joshwnj/inline-docs/blob/master/lib/render-doc-info.js#L112">lib/render-doc-info.js, line 112</a></div></article>
+</article>
 </section>
 
     </body>
