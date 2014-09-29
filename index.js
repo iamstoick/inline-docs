@@ -35,6 +35,7 @@ Extracting comments
 */
 
 var findit = require('findit');
+var fs = require('fs');
 var path = require('path');
 var minimatchAll = require('minimatch-all');
 var processFile = require('./lib/process-file');
@@ -67,13 +68,27 @@ var writeFunc = writeToStdout ?
     process.stdout.write.bind(process.stdout) :
     function () {};
 
-finder.on('file', function (filename, stat) {
-  if (minimatchAll(filename, opts.globs)) {
-    processFile(filename, function (err, info) {
-      if (err) { throw err; }
-      if (!info) { return; }
+function findAndProcessAll (callback) {
+  finder.on('file', function (filename, stat) {
+    if (minimatchAll(filename, opts.globs)) {
+      processFile(filename, function (err, info) {
+        if (err) { throw err; }
+        if (!info) { return; }
 
-      renderDocInfo(info, writeFunc);
-    });
-  }
+        renderDocInfo(info, writeFunc);
+      });
+    }
+  });
+
+  finder.on('end', function () {
+    callback();
+  });
+}
+
+var template = fs.readFileSync('./template/tpl.html', 'utf8');
+var parts = template.split('{{ content }}');
+
+writeFunc(parts[0]);
+findAndProcessAll(function (err) {
+  writeFunc(parts[1]);
 });
