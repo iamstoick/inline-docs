@@ -19,8 +19,9 @@ Run `inline-docs` in your project's root directory.
 Rules
 ----
 
-- to be considered valid, a source file must have exactly one level-1 heading.
-- single-line comments are only included if they begin with a `>` (eg. `//> comment goes here...`)
+- To be considered valid, a source file must have exactly one level-1 heading in the markdown portion.
+- Any comments before the level-1 heading are ignored.
+- Single-line comments are only included if they begin with a `>` (eg. `//> comment goes here...`)
 
 
 Project goals
