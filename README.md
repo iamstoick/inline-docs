@@ -15,6 +15,7 @@ Usage
 
 Run `inline-docs` in your project's root directory.
 
+For an example of output you can view the docs for this repo: <http://joshwnj.github.io/inline-docs>
 
 Rules
 ----
