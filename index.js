@@ -44,51 +44,35 @@ var renderDocInfo = require('./lib/render-doc-info');
 var dir = __dirname;
 var finder = findit(dir);
 
-/*
-
-Locating source files
-----
-
-By default we locate all .js files in the project directory, except for those in the `node_modules` directory.
-
-*/
-var opts = {
-  globs: [
-    //> include js and markdown files
-    '**/*.js',
-    '**/*.{md,markdown}',
-
-    //> exclude node_modules
-    '!**/node_modules/**'
-  ]
-};
-
 var writeToStdout = true;
 var writeFunc = writeToStdout ?
     process.stdout.write.bind(process.stdout) :
     function () {};
 
-function findAndProcessAll (callback) {
-  finder.on('file', function (filename, stat) {
-    if (minimatchAll(filename, opts.globs)) {
-      processFile(filename, function (err, info) {
-        if (err) { throw err; }
-        if (!info) { return; }
+module.exports = function (opts) {
 
-        renderDocInfo(info, writeFunc);
-      });
-    }
+  function findAndProcessAll (callback) {
+    finder.on('file', function (filename, stat) {
+      if (minimatchAll(filename, opts.globs)) {
+        processFile(filename, function (err, info) {
+          if (err) { throw err; }
+          if (!info) { return; }
+
+          renderDocInfo(info, writeFunc);
+        });
+      }
+    });
+
+    finder.on('end', function () {
+      callback();
+    });
+  }
+
+  var template = fs.readFileSync(__dirname + '/template/tpl.html', 'utf8');
+  var parts = template.split('{{ content }}');
+
+  writeFunc(parts[0]);
+  findAndProcessAll(function (err) {
+    writeFunc(parts[1]);
   });
-
-  finder.on('end', function () {
-    callback();
-  });
-}
-
-var template = fs.readFileSync('./template/tpl.html', 'utf8');
-var parts = template.split('{{ content }}');
-
-writeFunc(parts[0]);
-findAndProcessAll(function (err) {
-  writeFunc(parts[1]);
-});
+};
