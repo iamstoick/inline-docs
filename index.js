@@ -41,38 +41,75 @@ var minimatchAll = require('minimatch-all');
 var processFile = require('./lib/process-file');
 var renderDocInfo = require('./lib/render-doc-info');
 
-var dir = __dirname;
-var finder = findit(dir);
+/*
+
+Default options
+----
+
+By default we locate all .js files in the project directory, except for those in the `node_modules` directory.
+
+*/
+var defaultGlobs = [
+  //> include js and markdown files
+  '**/*.js',
+  '**/*.{md,markdown}',
+
+  //> exclude node_modules
+  '!**/node_modules/**'
+];
 
 var writeToStdout = true;
 var writeFunc = writeToStdout ?
     process.stdout.write.bind(process.stdout) :
     function () {};
 
+function findAndProcessAll (finder, opts, callback) {
+  finder.on('file', function (filename, stat) {
+    if (minimatchAll(filename, opts.globs)) {
+      processFile(filename, function (err, info) {
+        if (err) { throw err; }
+        if (!info) { return; }
+
+        renderDocInfo(opts, info, writeFunc);
+      });
+    }
+  });
+
+  finder.on('end', function () {
+    callback();
+  });
+}
+
 module.exports = function (opts) {
+  if (!opts) { opts = {}; }
 
-  function findAndProcessAll (callback) {
-    finder.on('file', function (filename, stat) {
-      if (minimatchAll(filename, opts.globs)) {
-        processFile(filename, function (err, info) {
-          if (err) { throw err; }
-          if (!info) { return; }
-
-          renderDocInfo(info, writeFunc);
-        });
-      }
-    });
-
-    finder.on('end', function () {
-      callback();
-    });
+  if (!opts.globs) {
+    opts.globs = defaultGlobs;
   }
 
-  var template = fs.readFileSync(__dirname + '/template/tpl.html', 'utf8');
+  if (!opts.template) {
+    opts.template = __dirname + '/template/tpl.html';
+  }
+
+  if (!opts.dir) {
+    opts.dir = process.cwd();
+  }
+
+  if (!opts.baseRepoUrl) {
+    var packageJson;
+    try {
+      packageJson = JSON.parse(fs.readFileSync(opts.dir + '/package.json', 'utf8'));
+      opts.baseRepoUrl = packageJson.repository.url.replace('.git', '');
+    }
+    catch (e) {}
+  }
+
+  var finder = findit(opts.dir);
+  var template = fs.readFileSync(opts.template, 'utf8');
   var parts = template.split('{{ content }}');
 
   writeFunc(parts[0]);
-  findAndProcessAll(function (err) {
+  findAndProcessAll(finder, opts, function (err) {
     writeFunc(parts[1]);
   });
 };

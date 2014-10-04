@@ -1,29 +1,11 @@
 #!/usr/bin/env node
 
 /*
+
 Command line interface
 ====
 
 */
 
-/*
-
-Default options
-----
-
-By default we locate all .js files in the project directory, except for those in the `node_modules` directory.
-
-*/
-var opts = {
-  globs: [
-    //> include js and markdown files
-    '**/*.js',
-    '**/*.{md,markdown}',
-
-    //> exclude node_modules
-    '!**/node_modules/**'
-  ]
-};
-
 var main = require('..');
-main(opts);
+main();
