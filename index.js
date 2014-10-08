@@ -38,6 +38,8 @@ var findit = require('findit');
 var fs = require('fs');
 var path = require('path');
 var minimatchAll = require('minimatch-all');
+var Readable = require('readable-stream');
+var through = require('through');
 var processFile = require('./lib/process-file');
 var renderDocInfo = require('./lib/render-doc-info');
 
@@ -58,26 +60,30 @@ var defaultGlobs = [
   '!**/node_modules/**'
 ];
 
-var writeToStdout = true;
-var writeFunc = writeToStdout ?
-    process.stdout.write.bind(process.stdout) :
-    function () {};
+function findAndProcessAll (finder, opts) {
+  var stream = new Readable({
+    objectMode: true,
+    highWaterMark: 16
+  });
 
-function findAndProcessAll (finder, opts, callback) {
+  stream._read = function () {};
+
   finder.on('file', function (filename, stat) {
     if (minimatchAll(filename, opts.globs)) {
       processFile(filename, function (err, info) {
         if (err) { throw err; }
         if (!info) { return; }
 
-        renderDocInfo(opts, info, writeFunc);
+        stream.push(info);
       });
     }
   });
 
   finder.on('end', function () {
-    callback();
+    stream.push(null);
   });
+
+  return stream;
 }
 
 module.exports = function (opts) {
@@ -97,10 +103,47 @@ module.exports = function (opts) {
 
   var finder = findit(opts.dir);
   var template = fs.readFileSync(opts.template, 'utf8');
-  var parts = template.split('{{ content }}');
+  var templateParts = template.split('{{ content }}');
+  var headings = {};
+  var linkInfo = [];
+  var render = function (info) {
+    //> store heading and link info so we can validate at the end
+    headings[info.heading] = info.subheadings;
+    linkInfo.push({
+      filename: info.filename,
+      links: info.links
+    });
 
-  writeFunc(parts[0]);
-  findAndProcessAll(finder, opts, function (err) {
-    writeFunc(parts[1]);
-  });
+    var writeFunc = this.queue.bind(this);
+    renderDocInfo(opts, info, writeFunc);
+  };
+
+  var validateLinks = function () {
+    linkInfo.forEach(function (info) {
+      info.links.forEach(function (link) {
+        var section = headings[link[0]];
+        if (!section) {
+          console.error('- Bad link to [[%s]] (%s)', link[0], info.filename);
+        }
+
+        if (link.length === 1) { return; }
+
+        if (section.indexOf(link[1]) === -1) {
+          console.error('- Bad link to [[%s]] (%s)', link.join(']['), info.filename);
+        }
+      });
+    });
+  };
+
+  process.stdout.write(templateParts[0]);
+
+  findAndProcessAll(finder, opts)
+    .pipe(through(render, function () {
+      validateLinks();
+
+      // write the template footer
+      this.queue(templateParts[1]);
+      this.queue(null);
+    }))
+    .pipe(process.stdout);
 };
