@@ -95,15 +95,6 @@ module.exports = function (opts) {
     opts.dir = process.cwd();
   }
 
-  if (!opts.baseRepoUrl) {
-    var packageJson;
-    try {
-      packageJson = JSON.parse(fs.readFileSync(opts.dir + '/package.json', 'utf8'));
-      opts.baseRepoUrl = packageJson.repository.url.replace('.git', '');
-    }
-    catch (e) {}
-  }
-
   var finder = findit(opts.dir);
   var template = fs.readFileSync(opts.template, 'utf8');
   var parts = template.split('{{ content }}');
