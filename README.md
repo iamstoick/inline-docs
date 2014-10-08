@@ -1,6 +1,8 @@
 Inline Docs
 ====
 
+[![Build Status](https://secure.travis-ci.org/joshwnj/inline-docs.png)](http://travis-ci.org/joshwnj/inline-docs)
+
 Embed markdown documentation in code.
 
 
