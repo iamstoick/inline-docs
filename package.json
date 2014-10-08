@@ -16,9 +16,11 @@
     "marked": "^0.3.2",
     "minimatch-all": "^1.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tape": "^3.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/tape tests/*.js"
   },
   "repository": {
     "type": "git",
