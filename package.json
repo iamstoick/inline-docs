@@ -1,6 +1,6 @@
 {
   "name": "inline-docs",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Embed markdown documentation in code.",
   "main": "index.js",
   "bin": {
@@ -10,7 +10,6 @@
     "example": "examples"
   },
   "dependencies": {
-    "acorn": "^0.8.0",
     "cdocparser": "^0.7.0",
     "findit": "^2.0.0",
     "lodash": "^2.4.1",
