@@ -1,4 +1,4 @@
-/**
+/*
 
 Overview
 ====
@@ -43,7 +43,7 @@ var through = require('through');
 var processFile = require('./lib/process-file');
 var renderDocInfo = require('./lib/render-doc-info');
 
-/**
+/*
 
 Default options
 ----
@@ -52,7 +52,7 @@ By default we locate all .js files in the project directory, except for those in
 
 */
 var defaultGlobs = [
-  ///> include common source and markdown files
+  //> include common source and markdown files
   '**/*.js',
   '**/*.html',
   '**/*.css',
@@ -95,7 +95,7 @@ module.exports = function (opts) {
     opts.globs = defaultGlobs;
   }
 
-  ///> If no template is specified we'll use the default in [[Html Template]].
+  //> If no template is specified we'll use the default in [[Html Template]].
   if (!opts.template) {
     opts.template = __dirname + '/template/tpl.html';
   }

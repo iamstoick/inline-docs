@@ -4,17 +4,17 @@
  *
  */
 
-/**
+/*
 
   Block comment with space prefix
   ====
 
 */
 
-///> Single-line comment
+//> Single-line comment
 
-/// Single-line
-/// comment
-/// spanning
-/// multiple
-/// lines
+// Single-line
+// comment
+// spanning
+// multiple
+// lines

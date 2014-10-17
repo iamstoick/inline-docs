@@ -1,4 +1,4 @@
-/**
+/*
 
 Test Extracting C-Style Comments
 ====
