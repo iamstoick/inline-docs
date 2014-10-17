@@ -4,7 +4,7 @@
  *
  */
 
-/*
+/**
 
   Block comment with space prefix
   ====
