@@ -1,4 +1,4 @@
-/*
+/**
 
 Overview
 ====
@@ -43,7 +43,7 @@ var through = require('through');
 var processFile = require('./lib/process-file');
 var renderDocInfo = require('./lib/render-doc-info');
 
-/*
+/**
 
 Default options
 ----
