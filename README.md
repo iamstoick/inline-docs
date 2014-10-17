@@ -15,7 +15,7 @@ Install
 Usage
 ----
 
-Run `inline-docs` in your project's root directory.
+Run `inline-docs . > docs.html` in your project's root directory.
 
 For an example of output you can view the docs for this repo: <http://joshwnj.github.io/inline-docs>
 
@@ -24,7 +24,8 @@ Rules
 
 - To be considered valid, a source file must have exactly one level-1 heading in the markdown portion.
 - Any comments before the level-1 heading are ignored.
-- Single-line comments are only included if they begin with a `>` (eg. `//> comment goes here...`)
+- Block-level comments are only included if they begin with 2 asterisks (eg. `/** ... */`)
+- Single-line comments are only included if they begin with a `///>` (eg. `///> comment goes here...`)
 
 
 Project goals
