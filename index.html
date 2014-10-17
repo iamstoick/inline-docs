@@ -110,12 +110,13 @@
 <h1 id="inline-docs">Inline Docs</h1><p><a href="http://travis-ci.org/joshwnj/inline-docs"><img src="https://secure.travis-ci.org/joshwnj/inline-docs.png" alt="Build Status"></a></p>
 <p>Embed markdown documentation in code.</p>
 <h2 id="inline-docs:install">Install</h2><p><code>npm install -g inline-docs</code></p>
-<h2 id="inline-docs:usage">Usage</h2><p>Run <code>inline-docs</code> in your project&#39;s root directory.</p>
+<h2 id="inline-docs:usage">Usage</h2><p>Run <code>inline-docs . &gt; docs.html</code> in your project&#39;s root directory.</p>
 <p>For an example of output you can view the docs for this repo: <a href="http://joshwnj.github.io/inline-docs">http://joshwnj.github.io/inline-docs</a></p>
 <h2 id="inline-docs:rules">Rules</h2><ul>
 <li>To be considered valid, a source file must have exactly one level-1 heading in the markdown portion.</li>
 <li>Any comments before the level-1 heading are ignored.</li>
-<li>Single-line comments are only included if they begin with a <code>&gt;</code> (eg. <code>//&gt; comment goes here...</code>)</li>
+<li>Block-level comments are only included if they begin with 2 asterisks (eg. <code>/** ... */</code>)</li>
+<li>Single-line comments are only included if they begin with a <code>///&gt;</code> (eg. <code>///&gt; comment goes here...</code>)</li>
 </ul>
 <h2 id="inline-docs:project-goals">Project goals</h2><p>There are many existing tools to help you generate documentation from code, but most of them are geared towards describing APIs. Put more generally, the tools and documentation are focussed on <em>what</em> the code is doing and <em>how</em> to properly call each function. This is useful, but a lot of the time we need to document <em>why</em> things were done in a certain way. Every design-decision and tradeoff made today impacts the possible decisions that can be made tomorrow, and this information is critical to new developers becoming involved in the project.</p>
 <p>Along with this, <code>inline-docs</code> has the following goals:</p>
@@ -127,17 +128,6 @@
 <h2 id="inline-docs:license">License</h2><p>MIT</p>
 
 <div class="source-ref">Source: <a href="./README.md#L0">/README.md, line 0</a></div></article>
-</section>
-<section data-filename="/index.html">
-<article data-line="4">
-<h1 id="html-template">Html Template</h1><p>This template is used when rendering docs to html, to wrap the markdown inside an html document.</p>
-
-<div class="source-ref">Source: <a href="./index.html#L4">/index.html, line 4</a></div></article>
-<article data-line="15">
-<h2 id="html-template:default-styles">Default styles</h2><p>All of the default styles are embedded in the template, to avoid extra http requests and make
-distribution easier.</p>
-
-<div class="source-ref">Source: <a href="./index.html#L15">/index.html, line 15</a></div></article>
 </section>
 <section data-filename="/index.js">
 <article data-line="1">
@@ -172,12 +162,46 @@ distribution easier.</p>
 </blockquote>
 
 <div class="source-ref">Source: <a href="./index.js#L55">/index.js, line 55</a></div></article>
+<article data-line="61">
+<blockquote>
+<p>exclude node_modules</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./index.js#L61">/index.js, line 61</a></div></article>
 <article data-line="98">
 <blockquote>
 <p>If no template is specified we&#39;ll use the default in <a class="doc-link" href="#html-template">Html Template</a>.</p>
 </blockquote>
 
 <div class="source-ref">Source: <a href="./index.js#L98">/index.js, line 98</a></div></article>
+<article data-line="113">
+<blockquote>
+<p>store heading and link info so we can validate at the end</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./index.js#L113">/index.js, line 113</a></div></article>
+</section>
+<section data-filename="/index.html">
+<article data-line="4">
+<h1 id="html-template">Html Template</h1><p>This template is used when rendering docs to html, to wrap the markdown inside an html document.</p>
+
+<div class="source-ref">Source: <a href="./index.html#L4">/index.html, line 4</a></div></article>
+<article data-line="15">
+<h2 id="html-template:default-styles">Default styles</h2><p>All of the default styles are embedded in the template, to avoid extra http requests and make
+distribution easier.</p>
+
+<div class="source-ref">Source: <a href="./index.html#L15">/index.html, line 15</a></div></article>
+</section>
+<section data-filename="/docs.html">
+<article data-line="4">
+<h1 id="html-template">Html Template</h1><p>This template is used when rendering docs to html, to wrap the markdown inside an html document.</p>
+
+<div class="source-ref">Source: <a href="./docs.html#L4">/docs.html, line 4</a></div></article>
+<article data-line="15">
+<h2 id="html-template:default-styles">Default styles</h2><p>All of the default styles are embedded in the template, to avoid extra http requests and make
+distribution easier.</p>
+
+<div class="source-ref">Source: <a href="./docs.html#L15">/docs.html, line 15</a></div></article>
 </section>
 <section data-filename="/lib/exclude-pre-heading-markdown-tokens.js">
 <article data-line="1">
@@ -218,6 +242,18 @@ so we can use a generic approach to extracting comments.</p>
 </ul>
 
 <div class="source-ref">Source: <a href="./lib/extract-links.js#L1">/lib/extract-links.js, line 1</a></div></article>
+<article data-line="12">
+<blockquote>
+<p>pattern that we use to match links</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./lib/extract-links.js#L12">/lib/extract-links.js, line 12</a></div></article>
+<article data-line="15">
+<blockquote>
+<p>split level-1 and level-2 parts</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./lib/extract-links.js#L15">/lib/extract-links.js, line 15</a></div></article>
 <article data-line="20">
 <h2 id="extract-document-links:module-interface">Module Interface</h2><p>Extract links from a string.</p>
 <p>Inputs:</p>
@@ -252,6 +288,12 @@ so we can use a generic approach to extracting comments.</p>
 <p>Output: CommentToken</p>
 
 <div class="source-ref">Source: <a href="./lib/find-comments.js#L19">/lib/find-comments.js, line 19</a></div></article>
+<article data-line="41">
+<blockquote>
+<p>don&#39;t consider empty lines as they are not a reliable indication of indentation</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./lib/find-comments.js#L41">/lib/find-comments.js, line 41</a></div></article>
 <article data-line="58">
 <h2 id="find-comments-in-source-code:convert-a-comment-to-a-doc-item">Convert a comment to a doc item</h2><p>Inputs</p>
 <ul>
@@ -268,6 +310,12 @@ so we can use a generic approach to extracting comments.</p>
 <p>Output: boolean</p>
 
 <div class="source-ref">Source: <a href="./lib/find-comments.js#L77">/lib/find-comments.js, line 77</a></div></article>
+<article data-line="92">
+<blockquote>
+<p>single-line comments are only included if they begin with a <code>&gt;</code> (see <a class="doc-link" href="#inline-docs:rules">Inline Docs&rarr;Rules</a>)</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./lib/find-comments.js#L92">/lib/find-comments.js, line 92</a></div></article>
 <article data-line="96">
 <h2 id="find-comments-in-source-code:module-interface">Module Interface</h2><p>Inputs:</p>
 <ul>
@@ -362,6 +410,18 @@ so we can use a generic approach to extracting comments.</p>
 <p>Output: HtmlString</p>
 
 <div class="source-ref">Source: <a href="./lib/render-doc-info.js#L55">/lib/render-doc-info.js, line 55</a></div></article>
+<article data-line="95">
+<blockquote>
+<p>assume the rendered documentation is in the root directory of the repo</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./lib/render-doc-info.js#L95">/lib/render-doc-info.js, line 95</a></div></article>
+<article data-line="109">
+<blockquote>
+<p>display a reference to the source code this comment comes from.</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./lib/render-doc-info.js#L109">/lib/render-doc-info.js, line 109</a></div></article>
 </section>
 <section data-filename="/template/tpl.html">
 <article data-line="4">
