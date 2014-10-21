@@ -138,6 +138,9 @@ module.exports = function (opts) {
     });
   };
 
+  //> prepend a directive so that the generated file is *not* included the next time we run `inline-docs`
+  process.stdout.write('<!--\n/* inline-docs:ignore */\n-->');
+
   //> write the template header
   process.stdout.write(templateParts[0]);
 
