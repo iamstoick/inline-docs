@@ -126,25 +126,26 @@ module.exports = function (opts) {
       info.links.forEach(function (link) {
         var section = headings[link[0]];
         if (!section) {
-          console.error('- Bad link to [[%s]] (%s)', link[0], info.filename);
+          return console.error('- Bad link to [[%s]] (%s)', link[0], info.filename);
         }
 
         if (link.length === 1) { return; }
 
         if (section.indexOf(link[1]) === -1) {
-          console.error('- Bad link to [[%s]] (%s)', link.join(']['), info.filename);
+          return console.error('- Bad link to [[%s]] (%s)', link.join(']['), info.filename);
         }
       });
     });
   };
 
+  //> write the template header
   process.stdout.write(templateParts[0]);
 
   findAndProcessAll(finder, opts)
     .pipe(through(render, function () {
       validateLinks();
 
-      // write the template footer
+      //> write the template footer
       this.queue(templateParts[1]);
       this.queue(null);
     }))
