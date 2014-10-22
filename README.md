@@ -15,7 +15,7 @@ Install
 Usage
 ----
 
-Run `inline-docs . > docs.html` in your project's root directory.
+Run `inline-docs > docs.html` in your project's root directory.
 
 For an example of output you can view the docs for this repo: <http://joshwnj.github.io/inline-docs>
 

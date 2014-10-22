@@ -99,6 +99,11 @@ module.exports = function (opts) {
     opts.dir = process.cwd();
   }
 
+  //> Either write to a file, or to stdout
+  var outStream = opts.outFile ?
+      fs.createWriteStream(opts.outFile) :
+      process.stdout;
+
   var finder = findit(opts.dir);
   var headings = {};
   var linkInfo = [];
@@ -138,10 +143,10 @@ module.exports = function (opts) {
     templateParts = template.split('{{ content }}');
 
     //> prepend a directive so that the generated file is *not* included the next time we run `inline-docs`
-    process.stdout.write('<!--\n/* inline-docs:ignore */\n-->');
+    outStream.write('<!--\n/* inline-docs:ignore */\n-->');
 
     //> write the template header
-    process.stdout.write(templateParts[0]);
+    outStream.write(templateParts[0]);
   }
 
   findAndProcessAll(finder, opts)
@@ -155,5 +160,5 @@ module.exports = function (opts) {
 
       this.queue(null);
     }))
-    .pipe(process.stdout);
+    .pipe(outStream);
 };

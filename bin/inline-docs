@@ -15,7 +15,10 @@ var opts = {
     dir: path.resolve(argv._[0] || '.'),
 
     //> If no template is specified we'll use the default in [[Html Template]].
-    template: path.resolve(__dirname + '/../template/tpl.html')
+    template: path.resolve(__dirname + '/../template/tpl.html'),
+
+    //> Output to a file (default is to stdout)
+    outFile: argv.o
 };
 
 if (argv.template) {
