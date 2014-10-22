@@ -15,6 +15,7 @@
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "minimatch-all": "^1.0.2",
+    "minimist": "^1.1.0",
     "readable-stream": "^1.0.32",
     "through": "^2.3.6"
   },

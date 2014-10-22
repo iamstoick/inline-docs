@@ -95,18 +95,11 @@ module.exports = function (opts) {
     opts.globs = defaultGlobs;
   }
 
-  //> If no template is specified we'll use the default in [[Html Template]].
-  if (!opts.template) {
-    opts.template = __dirname + '/template/tpl.html';
-  }
-
   if (!opts.dir) {
     opts.dir = process.cwd();
   }
 
   var finder = findit(opts.dir);
-  var template = fs.readFileSync(opts.template, 'utf8');
-  var templateParts = template.split('{{ content }}');
   var headings = {};
   var linkInfo = [];
   var render = function (info) {
@@ -138,18 +131,28 @@ module.exports = function (opts) {
     });
   };
 
-  //> prepend a directive so that the generated file is *not* included the next time we run `inline-docs`
-  process.stdout.write('<!--\n/* inline-docs:ignore */\n-->');
+  var template;
+  var templateParts;
+  if (opts.template) {
+    template = fs.readFileSync(opts.template, 'utf8');
+    templateParts = template.split('{{ content }}');
 
-  //> write the template header
-  process.stdout.write(templateParts[0]);
+    //> prepend a directive so that the generated file is *not* included the next time we run `inline-docs`
+    process.stdout.write('<!--\n/* inline-docs:ignore */\n-->');
+
+    //> write the template header
+    process.stdout.write(templateParts[0]);
+  }
 
   findAndProcessAll(finder, opts)
     .pipe(through(render, function () {
       validateLinks();
 
       //> write the template footer
-      this.queue(templateParts[1]);
+      if (templateParts) {
+        this.queue(templateParts[1]);
+      }
+
       this.queue(null);
     }))
     .pipe(process.stdout);
