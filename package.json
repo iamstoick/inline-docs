@@ -1,10 +1,10 @@
 {
   "name": "inline-docs",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Embed markdown documentation in code.",
   "main": "index.js",
   "bin": {
-    "inline-docs": "./bin/inline-docs"
+    "inline-docs": "./bin/inline-docs.js"
   },
   "directories": {
     "example": "examples"
