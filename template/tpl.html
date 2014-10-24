@@ -10,8 +10,10 @@
 
   */
   -->
-    <head>
-        <style type="text/css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <style type="text/css">
           /*
 
           Default styles
@@ -75,6 +77,7 @@
             #table-of-contents {
               float: right;
               width: 40%;
+              min-width: 220px;
               background: #efefef;
               font-size: 0.8em;
               padding: 1em 2em 1em 3em;
@@ -106,6 +109,25 @@
               from { background: yellow; }
               to { background: white; }
             }
+
+            @media (max-width: 1000px) {
+                body {
+                    padding: 0 1em;
+                    font-size: 1.2em;
+                }
+
+                #table-of-contents {
+                    width: auto;
+                    float: none;
+                    font-size: 1em;
+                    margin-left: 0;
+                }
+
+                #table-of-contents li {
+                    margin: 0.6em 0;
+                }
+            }
+
         </style>
     </head>
     <body>
@@ -124,7 +146,8 @@
           ToC.id = 'table-of-contents';
           ToC.innerHTML = tocHtml;
 
-          document.body.insertBefore(ToC, document.body.childNodes[0]);
+          var firstHeading = document.querySelectorAll('h1')[0];
+          firstHeading.parentNode.insertBefore(ToC, firstHeading.nextSibling);
         </script>
     </body>
 </html>
