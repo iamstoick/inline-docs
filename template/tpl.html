@@ -14,140 +14,139 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <style type="text/css">
-          /*
+     /*
 
-          Default styles
-          ----
+        Default styles
+        ----
 
-          All of the default styles are embedded in the template, to avoid extra http requests and make
-          distribution easier.
+        All of the default styles are embedded in the template, to avoid extra http requests and make
+        distribution easier.
 
-          */
-            body {
-              font-family: Arial;
-            }
+      */
+     body {
+       font-family: Arial;
+     }
 
-            h1,h2,h3,h4,h5,h6 {
-              font-family: Serif;
-            }
+     h1,h2,h3,h4,h5,h6 {
+       font-family: Serif;
+     }
 
-            h1 {
-              font-size: 30px;
-            }
+     h1 {
+       font-size: 30px;
+     }
 
-            h2 {
-              font-size: 20px;
-              margin-top: 40px;
-            }
+     h2 {
+       font-size: 20px;
+       margin-top: 40px;
+     }
 
-            h3 {
-              font-size: 16px;
-            }
+     h3 {
+       font-size: 16px;
+     }
 
-            section {
-              max-width: 800px;
-              margin: 0 auto;
-              border-bottom: 5px solid #000;
-              padding-bottom: 50px;
-            }
+     section {
+       max-width: 800px;
+       margin: 0 auto;
+       border-bottom: 5px solid #000;
+       padding-bottom: 50px;
+     }
 
-            blockquote {
-              font-style: italic;
-              border-left: 10px solid #EEE;
-              padding: 10px 0 10px 40px;
-              margin: 0;
-            }
+     blockquote {
+       font-style: italic;
+       border-left: 10px solid #EEE;
+       padding: 10px 0 10px 40px;
+       margin: 0;
+     }
 
-            .source-ref {
-              padding: 0 0 10px 0;
-              font-size: 12px;
-              font-style: italic;
-              color: #999;
-            }
+     .source-ref {
+       padding: 0 0 10px 0;
+       font-size: 12px;
+       font-style: italic;
+       color: #999;
+     }
 
-            .source-ref a {
-              color: #999;
-              text-decoration: none;
-            }
+     .source-ref a {
+       color: #999;
+       text-decoration: none;
+     }
 
-            .source-ref a:hover {
-              text-decoration: underline;
-            }
+     .source-ref a:hover {
+       text-decoration: underline;
+     }
 
-            #table-of-contents {
-              float: right;
-              width: 40%;
-              min-width: 220px;
-              background: #efefef;
-              font-size: 0.8em;
-              padding: 1em 2em 1em 3em;
-              margin: 0 0 0.5em 0.5em;
-            }
+     #table-of-contents {
+       float: right;
+       width: 40%;
+       min-width: 220px;
+       background: #efefef;
+       font-size: 0.8em;
+       padding: 1em 2em 1em 3em;
+       margin: 0 0 0.5em 0.5em;
+     }
 
-            #table-of-contents ul {
-              padding: 0;
-            }
+     #table-of-contents ul {
+       padding: 0;
+     }
 
-            #table-of-contents li {
-              margin: 0 0 0.25em 0;
-            }
+     #table-of-contents li {
+       margin: 0 0 0.25em 0;
+     }
 
-            #table-of-contents a {
-              text-decoration: none;
-            }
+     #table-of-contents a {
+       text-decoration: none;
+     }
 
-            #table-of-contents a:hover,
-            #table-of-contents a:active {
-              text-decoration: underline;
-            }
+     #table-of-contents a:hover,
+     #table-of-contents a:active {
+       text-decoration: underline;
+     }
 
-            h1:target {
-              animation: highlight 1s ease;
-            }
+     h1:target {
+       animation: highlight 1s ease;
+     }
 
-            @keyframes highlight {
-              from { background: yellow; }
-              to { background: white; }
-            }
+     @keyframes highlight {
+       from { background: yellow; }
+       to { background: white; }
+     }
 
-            @media (max-width: 1000px) {
-                body {
-                    padding: 0 1em;
-                    font-size: 1.2em;
-                }
+     @media (max-width: 1000px) {
+       body {
+         padding: 0 1em;
+         font-size: 1.2em;
+       }
 
-                #table-of-contents {
-                    width: auto;
-                    float: none;
-                    font-size: 1em;
-                    margin-left: 0;
-                }
+       #table-of-contents {
+         width: auto;
+         float: none;
+         font-size: 1em;
+         margin-left: 0;
+       }
 
-                #table-of-contents li {
-                    margin: 0.6em 0;
-                }
-            }
+       #table-of-contents li {
+         margin: 0.6em 0;
+       }
+     }
+    </style>
+  </head>
+  <body>
+    {{ content }}
 
-        </style>
-    </head>
-    <body>
-        {{ content }}
+    <script>
+     var ToC = document.createElement('div');
+     var headers = document.getElementsByTagName('h1');
 
-        <script>
-          var ToC = document.createElement('div');
-          var headers = document.getElementsByTagName('h1');
+     tocHtml = "<nav role='navigation' class='table-of-contents'><strong>Table of Contents:</strong><ul>";
+     for (var i = 0; i < headers.length; i++) {
+       tocHtml += "<li><a href='#" + headers[i].id + "'>" + headers[i].innerHTML + "</a></li>";
+     }
+     tocHtml += "</ul></nav>";
 
-          tocHtml = "<nav role='navigation' class='table-of-contents'><strong>Table of Contents:</strong><ul>";
-          for (var i = 0; i < headers.length; i++) {
-            tocHtml += "<li><a href='#" + headers[i].id + "'>" + headers[i].innerHTML + "</a></li>";
-          }
-          tocHtml += "</ul></nav>";
+     ToC.id = 'table-of-contents';
+     ToC.innerHTML = tocHtml;
 
-          ToC.id = 'table-of-contents';
-          ToC.innerHTML = tocHtml;
-
-          var firstHeading = document.querySelectorAll('h1')[0];
-          firstHeading.parentNode.insertBefore(ToC, firstHeading.nextSibling);
-        </script>
-    </body>
+     var firstHeading = document.querySelectorAll('h1')[0];
+     firstHeading.parentNode.insertBefore(ToC, firstHeading.nextSibling);
+    </script>
+  </body>
 </html>
