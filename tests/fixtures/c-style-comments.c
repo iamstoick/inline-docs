@@ -11,7 +11,7 @@
 
 */
 
-//> Single-line comment
+//> Single-line comment with commenty stuff in it like `*/**/`
 
 // Single-line
 // comment

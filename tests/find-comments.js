@@ -18,8 +18,8 @@ tape('Find comments in a source file', function (t) {
 
   t.equal(
     docItems[1].tokens[1].text,
-    'Single-line comment',
+    'Single-line comment with commenty stuff in it like `*/**/`',
     'Correct text of single line comment');
-  
+
   t.end();
 });
