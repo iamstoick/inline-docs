@@ -21,7 +21,7 @@ Run `inline-docs > docs.html` in your project's root directory. Creates docs lik
 See [[Command line interface]] for more options.
 
 
-Module API
+Running from javascript
 ----
 
 See [[Module entry point]] for API details.
@@ -32,7 +32,7 @@ Getting started
 
 ### Writing docs
 
-- all documentation is written as markdown. You can do this either in a `.md` file, or embed a markdown document within the comments of a source code file.
+- all documentation is written in markdown format. You can do this either in a `.md` file, or embed a markdown document within the comments of a source code file.
 
 - markdown documents will only be used if they pass some basic validation rules. See [[Validating markdown documents]] for details.
 
