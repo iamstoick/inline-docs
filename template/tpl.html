@@ -182,12 +182,29 @@
 
          var sectionHtml = "<li><a href='#" + headerOne[0].id + "'>" + headerOne[0].innerHTML + "</a>";
 
+         if (typeof headerOne[0].id !== "undefined" && headerOne[0].id !== "") {
+             var anchor = document.createElement("a");
+             anchor.href = "#" + headerOne[0].id;
+             anchor.innerHTML = headerOne[0].innerHTML;
+             headerOne[0].innerHTML = "";
+             headerOne[0].appendChild(anchor);
+         }
+
          var headersTwo = section.getElementsByTagName('h2');
          headersTwo = toArray(headersTwo);
 
          if (headersTwo.length > 0) {
              sectionHtml += "<ul>";
              sectionHtml += headersTwo.map(function(h2) {
+
+             if (typeof h2.id !== "undefined" && h2.id !== "") {
+                 var anchor = document.createElement("a");
+                 anchor.href = "#" + h2.id;
+                 anchor.innerHTML = h2.innerHTML;
+                 h2.innerHTML = "";
+                 h2.appendChild(anchor);
+             }
+
                  return "<li><a href='#" + h2.id + "'>" + h2.innerHTML + "</a>";;
              }).join('\n');
              sectionHtml += "</ul>";
