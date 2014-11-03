@@ -34,6 +34,7 @@ var defaultGlobs = [
 ];
 
 function findAndProcessAll (finder, opts) {
+  var hasEnded = false;
   var stream = new Readable({
     objectMode: true,
     highWaterMark: 16
@@ -48,12 +49,16 @@ function findAndProcessAll (finder, opts) {
         if (!info) { return; }
 
         stream.push(info);
+
+        if (hasEnded) {
+          stream.push(null);
+        }
       });
     }
   });
 
   finder.on('end', function () {
-    stream.push(null);
+    hasEnded = true;
   });
 
   return stream;
