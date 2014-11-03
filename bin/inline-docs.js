@@ -17,10 +17,17 @@ inline-docs -o $OUTPUT_FILE --template=$TEMPLATE $PROJECT_DIR
 
 */
 
+var fs = require('fs');
 var minimist = require('minimist');
 var path = require('path');
 
 var argv = minimist(process.argv.slice(2));
+
+function createOutStream (path) {
+  if (!path) { return null; }
+
+  return fs.createWriteStream(path);
+}
 
 //> These options are passed into [[Module entry point]].
 var opts = {
@@ -30,7 +37,7 @@ var opts = {
     template: path.resolve(__dirname + '/../template/tpl.html'),
 
     //> Use the `-o` arg to write output to a file (default is to stdout)
-    outFile: argv.o
+    outStream: createOutStream(argv.o)
 };
 
 if (argv.template) {

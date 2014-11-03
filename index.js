@@ -71,9 +71,7 @@ module.exports = function (opts) {
   }
 
   //> Either write to a file, or to stdout
-  var outStream = opts.outFile ?
-      fs.createWriteStream(opts.outFile) :
-      process.stdout;
+  var outStream = opts.outStream || process.stdout;
 
   var finder = findit(opts.dir);
   var headings = {};
