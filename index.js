@@ -21,11 +21,14 @@ By default we locate all .js files in the project directory, except for those in
 
 */
 var defaultGlobs = [
+  //> make sure README comes first
+  './README.*',
+
   //> include common source and markdown files
+  '**/*.{md,markdown}',
   '**/*.js',
   '**/*.html',
   '**/*.css',
-  '**/*.{md,markdown}',
 
   //> exclude node_modules
   '!**/node_modules/**'
@@ -49,17 +52,6 @@ module.exports = function (opts) {
 
   var headings = {};
   var linkInfo = [];
-  var render = function (info) {
-    //> store heading and link info so we can validate at the end
-    headings[info.heading] = info.subheadings;
-    linkInfo.push({
-      filename: info.filename,
-      links: info.links
-    });
-
-    var writeFunc = this.queue.bind(this);
-    renderDocInfo(opts, info, writeFunc);
-  };
 
   var validateLinks = function () {
     linkInfo.forEach(function (info) {
