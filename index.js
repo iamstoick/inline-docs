@@ -5,12 +5,10 @@ Module entry point
 
 */
 
-var findit = require('findit');
+
 var fs = require('fs');
-var path = require('path');
-var minimatchAll = require('minimatch-all');
-var Readable = require('readable-stream');
-var through = require('through');
+var gs = require('glob-stream');
+var through = require('through2');
 var processFile = require('./lib/process-file');
 var renderDocInfo = require('./lib/render-doc-info');
 
@@ -33,37 +31,6 @@ var defaultGlobs = [
   '!**/node_modules/**'
 ];
 
-function findAndProcessAll (finder, opts) {
-  var hasEnded = false;
-  var stream = new Readable({
-    objectMode: true,
-    highWaterMark: 16
-  });
-
-  stream._read = function () {};
-
-  finder.on('file', function (filename, stat) {
-    if (minimatchAll(filename, opts.globs)) {
-      processFile(filename, function (err, info) {
-        if (err) { throw err; }
-        if (!info) { return; }
-
-        stream.push(info);
-
-        if (hasEnded) {
-          stream.push(null);
-        }
-      });
-    }
-  });
-
-  finder.on('end', function () {
-    hasEnded = true;
-  });
-
-  return stream;
-}
-
 module.exports = function (opts) {
   if (!opts) { opts = {}; }
 
@@ -78,7 +45,8 @@ module.exports = function (opts) {
   //> Either write to a file, or to stdout
   var outStream = opts.outStream || process.stdout;
 
-  var finder = findit(opts.dir);
+  var globStream = gs.create(opts.globs);
+
   var headings = {};
   var linkInfo = [];
   var render = function (info) {
@@ -123,16 +91,41 @@ module.exports = function (opts) {
     outStream.write(templateParts[0]);
   }
 
-  findAndProcessAll(finder, opts)
-    .pipe(through(render, function () {
+  var processTransform = through(
+    { objectMode: true },
+    function onFile (file, enc, cb) {
+      processFile(file.path, function (err, info) {
+        if (err) { return cb(err); }
+        if (!info) { return cb(); }
+
+        //> store heading and link info so we can validate at the end
+        headings[info.heading] = info.subheadings;
+        linkInfo.push({
+          filename: info.filename,
+          links: info.links
+        });
+
+        var output = [];
+        renderDocInfo(opts, info, function (data) {
+          output.push(data);
+        });
+
+        cb(null, output.join(''));
+      });
+    },
+    function onEnd (cb) {
       validateLinks();
 
       //> write the template footer
       if (templateParts) {
-        this.queue(templateParts[1]);
+        this.push(templateParts[1]);
       }
 
-      this.queue(null);
-    }))
+      cb();
+    }
+  );
+
+  globStream
+    .pipe(processTransform)
     .pipe(outStream);
 };
