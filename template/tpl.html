@@ -25,7 +25,7 @@
       */
      body {
        font-family: Arial;
-        line-height: 1.5;
+       line-height: 1.5;
      }
 
      h1,h2,h3,h4,h5,h6 {
@@ -43,6 +43,18 @@
 
      h3 {
        font-size: 16px;
+     }
+
+     h1 a,
+     h2 a {
+       color: #000;
+       text-decoration: none;
+     }
+
+     h1 a:hover:after,
+     h2 a:hover:after {
+       content: ' #';
+       color: #999;
      }
 
      section {
@@ -170,6 +182,24 @@
      to do: document this crazy stuff
 
      */
+
+     function createAnchorElem (headingElem) {
+       var elem = document.createElement('a');
+       elem.href = '#' + headingElem.id;
+       elem.innerHTML = headingElem.innerHTML;
+
+       return elem;
+     }
+
+     function addAnchor (headingElem) {
+       var id = headingElem.id;
+       if (!id) { return; }
+
+       var anchorElem = createAnchorElem(headingElem);
+       headingElem.innerHTML = '';
+       headingElem.appendChild(anchorElem);
+     }
+
      var ToC = document.createElement('div');
      var sections = document.getElementsByTagName('section');
      sections = toArray(sections);
@@ -181,14 +211,7 @@
          headerOne = toArray(headerOne);
 
          var sectionHtml = "<li><a href='#" + headerOne[0].id + "'>" + headerOne[0].innerHTML + "</a>";
-
-         if (typeof headerOne[0].id !== "undefined" && headerOne[0].id !== "") {
-             var anchor = document.createElement("a");
-             anchor.href = "#" + headerOne[0].id;
-             anchor.innerHTML = headerOne[0].innerHTML;
-             headerOne[0].innerHTML = "";
-             headerOne[0].appendChild(anchor);
-         }
+         addAnchor(headerOne[0]);
 
          var headersTwo = section.getElementsByTagName('h2');
          headersTwo = toArray(headersTwo);
@@ -196,15 +219,7 @@
          if (headersTwo.length > 0) {
              sectionHtml += "<ul>";
              sectionHtml += headersTwo.map(function(h2) {
-
-             if (typeof h2.id !== "undefined" && h2.id !== "") {
-                 var anchor = document.createElement("a");
-                 anchor.href = "#" + h2.id;
-                 anchor.innerHTML = h2.innerHTML;
-                 h2.innerHTML = "";
-                 h2.appendChild(anchor);
-             }
-
+                 addAnchor(h2);
                  return "<li><a href='#" + h2.id + "'>" + h2.innerHTML + "</a>";;
              }).join('\n');
              sectionHtml += "</ul>";
