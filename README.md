@@ -18,13 +18,13 @@ Running from CLI
 
 Run `inline-docs > docs.html` in your project's root directory. Creates docs like <http://joshwnj.github.io/inline-docs>.
 
-See [[Command line interface]] for more options.
+See [Command line interface](http://joshwnj.github.io/inline-docs/#command-line-interface) for more options.
 
 
 Running from javascript
 ----
 
-See [[Module entry point]] for API details.
+See [Module entry point](http://joshwnj.github.io/inline-docs/#module-entry-point) for API details.
 
 
 Getting started
@@ -34,7 +34,7 @@ Getting started
 
 - all documentation is written in markdown format. You can do this either in a `.md` file, or embed a markdown document within the comments of a source code file.
 
-- markdown documents will only be used if they pass some basic validation rules. See [[Validating markdown documents]] for details.
+- markdown documents will only be used if they pass some basic validation rules. See [Validating markdown documents](http://joshwnj.github.io/inline-docs/#validating-markdown-documents) for details.
 
 
 ### Linking
@@ -48,7 +48,7 @@ Getting started
 
 - You may come across cases where you want to exclude certain files from being parsed by `inline-docs` (eg. to avoid junk in your docs).
 - To exclude a single file, add the `/* inline-docs:ignore */` directive to the top of the file.
-- To exclude a set of files, override the patterns defined at [[Module entry point][Default options]].
+- To exclude a set of files, override the patterns defined at [Module entry point: Default options](http://joshwnj.github.io/inline-docs/#module-entry-point:default-options).
 
 License
 ----
