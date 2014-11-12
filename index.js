@@ -98,9 +98,18 @@ module.exports = function (opts) {
         });
 
         var output = [];
-        renderDocInfo(opts, info, function (data) {
-          output.push(data);
-        });
+
+        if (opts.asHtml) {
+          renderDocInfo(opts, info, function (data) {
+            output.push(data);
+          });
+        }
+        // output as markdown
+        else {
+          output = info.items.map(function (item) {
+            return item.raw ? item.raw + '\n\n' : '';
+          });
+        }
 
         cb(null, output.join(''));
       });
