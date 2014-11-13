@@ -10,7 +10,8 @@ var fs = require('fs');
 var gs = require('glob-stream');
 var through = require('through2');
 var processFile = require('./lib/process-file');
-var renderDocInfo = require('./lib/render-doc-info');
+var renderHtml = require('./lib/render-as-html');
+var renderMarkdown = require('./lib/render-as-markdown');
 
 /*
 
@@ -99,17 +100,10 @@ module.exports = function (opts) {
 
         var output = [];
 
-        if (opts.asHtml) {
-          renderDocInfo(opts, info, function (data) {
-            output.push(data);
-          });
-        }
-        // output as markdown
-        else {
-          output = info.items.map(function (item) {
-            return item.raw ? item.raw + '\n\n' : '';
-          });
-        }
+        var renderer = opts.asHtml ? renderHtml : renderMarkdown;
+        renderer(opts, info, function (data) {
+          output.push(data);
+        });
 
         cb(null, output.join(''));
       });
