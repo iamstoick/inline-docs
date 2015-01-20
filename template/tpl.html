@@ -23,148 +23,594 @@
         distribution easier.
 
       */
-     body {
-       font-family: Arial;
-       line-height: 1.5;
-     }
+      html {
+        box-sizing: border-box;
+        height: 100%;
+        max-height: 100%;
+      }
 
-     h1,h2,h3,h4,h5,h6 {
-       font-family: Serif;
-     }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
 
-     h1 {
-       font-size: 30px;
-     }
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, Sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        word-wrap: break-word;
+        margin: 0;
+        height: inherit;
+        max-height: inherit;
+      }
 
-     h2 {
-       font-size: 20px;
-       margin-top: 40px;
-     }
+      p {
+        margin: 0 0 1em;
+      }
 
-     h3 {
-       font-size: 16px;
-     }
+      a {
+        color: #4183c4;
+        text-decoration: none;
+      }
 
-     h1 a,
-     h2 a {
-       color: #000;
-       text-decoration: none;
-     }
+      a:hover,
+      a:focus,
+      a:active {
+        text-decoration: underline;
+      }
 
-     h1 a:hover:after,
-     h2 a:hover:after {
-       content: ' #';
-       color: #999;
-     }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        line-height: 1.1;
+        margin: 2em 0 0.5em;
+      }
 
-     section {
-       width: 800px;
-       max-width: 100%;
-       margin: 0 auto;
-       border-bottom: 5px solid #000;
-       padding-bottom: 50px;
-     }
+      h1 {
+        padding-bottom: 0.3em;
+        font-size: 2.25em;
+        line-height: 1.2;
+        border-bottom: 1px solid #eee;
+      }
 
-     blockquote {
-       font-style: italic;
-       border-left: 10px solid #EEE;
-       padding: 10px 0 10px 40px;
-       margin: 0;
-     }
+      h2 {
+        padding-bottom: 0.3em;
+        font-size: 1.75em;
+        line-height: 1.225;
+        border-bottom: 1px solid #eee;
+      }
+
+      h3 {
+        font-size: 1.5em;
+        line-height: 1.43;
+      }
+
+      h4 {
+        font-size: 1.25em;
+      }
+
+      h5 {
+        font-size: 1em;
+      }
+
+      h6 {
+        font-size: 1em;
+        color: #777;
+      }
+
+      h1 a, h1 a:hover,
+      h2 a, h2 a:hover,
+      h3 a, h3 a:hover,
+      h4 a, h4 a:hover,
+      h5 a, h5 a:hover,
+      h6 a, h6 a:hover {
+        color: #000;
+        text-decoration: none;
+      }
+
+      h1 a:hover:after,
+      h2 a:hover:after,
+      h3 a:hover:after,
+      h4 a:hover:after,
+      h5 a:hover:after,
+      h6 a:hover:after {
+        content: ' #';
+        color: #999;
+      }
+
+      hr {
+        height: 1px;
+        border: none;
+        background: #ccc;
+        width: 90%;
+      }
+
+      blockquote {
+        font-style: italic;
+        border-left: 0.6em solid #EEE;
+        padding: 0 0 0 1em;
+        margin: 0 0 1em;
+      }
+
+      blockquote > :first-child {
+        margin-top: 0;
+      }
+
+      blockquote > :last-child {
+        margin-bottom: 0;
+      }
 
       pre {
-          /*> code blocks longer than section max width will scroll */
-          overflow-x: auto;
-          padding: 1em;
-          background: #eee;
-          border-radius: 5px;
+        /*> code blocks longer than section max width will scroll */
+        overflow-x: auto;
+        padding: 1em;
+        background: #eee;
+        border-radius: 5px;
+        margin: 0 0 1em;
       }
 
       code {
-          line-height: 1.7;
-          background: #eee;
-          padding: 0.2em;
-          border-radius: 3px;
+        font-size: 1em;
+        line-height: 1.7;
+        background: #eee;
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        word-wrap: normal;
+        color: #333;
       }
 
-     .source-ref {
-       padding: 0 0 10px 0;
-       font-size: 12px;
-       font-style: italic;
-       color: #999;
-     }
+      pre code {
+        font-size: 0.9em;
+        line-height: 1.4;
+        padding: 0;
+      }
 
-     .source-ref a {
-       color: #999;
-       text-decoration: none;
-     }
+      ul,
+      ol {
+        padding: 0 0 0 1.2em;
+        margin: 0 0 1em;
+      }
 
-     .source-ref a:hover {
-       text-decoration: underline;
-     }
+      /*
+      Layout tag
+      -----
 
-     #table-of-contents {
-       float: right;
-       width: 40%;
-       min-width: 220px;
-       background: #efefef;
-       font-size: 0.8em;
-       padding: 1em 2em 1em 3em;
-       margin: 0 0 0.5em 0.5em;
-     }
+      `<layout>` here is the element that wraps a bunch of rows and columns
 
-     #table-of-contents ul {
-       padding: 0;
-     }
+      */
+      layout {
+        position: relative;
+        display: block;
+        font-size: 0.9rem;
+        height: 100%;
+        max-height: 100%;
+        width: 100%;
+      }
+        
+      @media (min-width: 768px) {
+        layout {
+          font-size: 1rem;
+        }
+      }
 
-     #table-of-contents ul ul {
-       padding: 0 0 0 1em;
-     }
+      @media (min-width: 1024px) {
+        layout {
+          font-size: 1rem;
+        }
+      }
 
-     #table-of-contents li {
-       margin: 0 0 0.25em 0;
-     }
+      @media print {
+        layout {
+          height: auto;
+        }
+      }
 
-     #table-of-contents a {
-       text-decoration: none;
-     }
+      layout row {
+        position: relative;
+        display: block;
+        height: inherit;
+        max-height: inherit;
+      }
 
-     #table-of-contents a:hover,
-     #table-of-contents a:active {
-       text-decoration: underline;
-     }
+      layout:before,
+      layout:after,
+      layout row:before,
+      layout row:after {
+        content: " ";
+        display: table;
+      }
 
-     h1:target {
-       animation: highlight 1s ease;
-     }
+      layout:after,
+      layout row:after {
+        clear: both;
+      }
 
-     @keyframes highlight {
-       from { background: yellow; }
-       to { background: white; }
-     }
+      layout column {
+        position: relative;
+        display: block;
+        float: left;
+        overflow-y: auto;
+        height: initial;
+        max-height: initial;
+      }
+        
+      layout column[cols="1"] {
+        width: 8.33333%;
+      }
 
-     @media (max-width: 1000px) {
-       body {
-         padding: 0 1em;
-         font-size: 1.2em;
-       }
+      layout column[cols="2"] {
+        width: 16.66667%;
+      }
 
-       #table-of-contents {
-         width: auto;
-         float: none;
-         font-size: 1em;
-         margin-left: 0;
-       }
+      layout column[cols="3"] {
+        width: 25%;
+      }
 
-       #table-of-contents li {
-         margin: 0.6em 0;
-       }
-     }
+      layout column[cols="4"] {
+        width: 33.33333%;
+      }
+
+      layout column[cols="6"] {
+        width: 50%;
+      }
+
+      layout column[cols="8"] {
+        width: 66.66667%;
+      }
+
+      layout column[cols="9"] {
+        width: 75%;
+      }
+
+      layout column[cols="10"] {
+        width: 83.33333%;
+      }
+
+      layout column[cols="11"] {
+        width: 91.66667%;
+      }
+
+      layout column[cols="12"] {
+        width: 100%;
+      }
+
+      @media (min-width: 768px) {
+        layout column {
+          height: 100%;
+          max-height: 100%;
+        }
+
+        layout column[cols-768="1"] {
+          width: 8.33333%;
+        }
+
+        layout column[cols-768="2"] {
+          width: 16.66667%;
+        }
+
+        layout column[cols-768="3"] {
+          width: 25%;
+        }
+
+        layout column[cols-768="4"] {
+          width: 33.33333%;
+        }
+
+        layout column[cols-768="6"] {
+          width: 50%;
+        }
+
+        layout column[cols-768="8"] {
+          width: 66.66667%;
+        }
+
+        layout column[cols-768="9"] {
+          width: 75%;
+        }
+
+        layout column[cols-768="10"] {
+          width: 83.33333%;
+        }
+
+        layout column[cols-768="11"] {
+          width: 91.66667%;
+        }
+
+        layout column[cols-768="12"] {
+          width: 100%;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        layout column[cols-1024="1"] {
+          width: 8.33333%;
+        }
+
+        layout column[cols-1024="2"] {
+          width: 16.66667%;
+        }
+
+        layout column[cols-1024="3"] {
+          width: 25%;
+        }
+
+        layout column[cols-1024="4"] {
+          width: 33.33333%;
+        }
+
+        layout column[cols-1024="6"] {
+          width: 50%;
+        }
+
+        layout column[cols-1024="8"] {
+          width: 66.66667%;
+        }
+
+        layout column[cols-1024="9"] {
+          width: 75%;
+        }
+
+        layout column[cols-1024="10"] {
+          width: 83.33333%;
+        }
+
+        layout column[cols-1024="11"] {
+          width: 91.66667%;
+        }
+
+        layout column[cols-1024="12"] {
+          width: 100%;
+        }
+      }
+
+      @media (min-width: 1680px) {
+        layout column[cols-1680="1"] {
+          width: 8.33333%;
+        }
+
+        layout column[cols-1680="2"] {
+          width: 16.66667%;
+        }
+
+        layout column[cols-1680="3"] {
+          width: 25%;
+        }
+
+        layout column[cols-1680="4"] {
+          width: 33.33333%;
+        }
+
+        layout column[cols-1680="6"] {
+          width: 50%;
+        }
+
+        layout column[cols-1680="8"] {
+          width: 66.66667%;
+        }
+
+        layout column[cols-1680="9"] {
+          width: 75%;
+        }
+
+        layout column[cols-1680="10"] {
+          width: 83.33333%;
+        }
+
+        layout column[cols-1680="11"] {
+          width: 91.66667%;
+        }
+
+        layout column[cols-1680="12"] {
+          width: 100%;
+        }
+      }
+
+      /*
+      Article and Section
+      -----
+      */
+      section {
+        margin: 0 1em 2px;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 2em 0 2.7em;
+      }
+        
+        @media (min-width: 1024px) {
+          section {
+            padding: 2em 2em 2.7em;
+          }
+          }
+        section h1:first-child {
+          margin-top: 0;
+          padding-top: 0;
+        }
+        section article {
+          margin: 0 0 1.5em;
+          /*
+              ### source-ref
+
+              */
+          /* // > Target animation. When click on any link with anchor placeholder (#),
+          this will highlight the target anchor. */
+        }
+          section article:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+          }
+          section article img {
+            width: auto;
+            max-width: 100%;
+          }
+          section article p,
+          section article ul,
+          section article blockquote {
+            width: 100%;
+            max-width: 38rem;
+          }
+          section article .source-ref {
+            padding: 0 0 1em 0;
+            font-size: 0.8em;
+            font-style: italic;
+            color: #999;
+          }
+          section article .source-ref a {
+            color: #999;
+            text-decoration: none;
+          }
+          section article .source-ref a:hover {
+            text-decoration: underline;
+          }
+          section article h1:target {
+            -webkit-animation: highlight 1s ease;
+                    animation: highlight 1s ease;
+                  }
+
+      @-webkit-keyframes highlight {
+        from {
+          background: yellow;
+        }
+
+        to {
+          background: white;
+        }
+        }
+
+      @keyframes highlight {
+        from {
+          background: yellow;
+        }
+
+        to {
+          background: white;
+        }
+        }
+
+      /*
+      ### Navigation column
+
+      */
+      #navigation {
+        display: none;
+        background: #efefef;
+        border-right: 5px solid #dfdfdf;
+      }
+
+      #navigation ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      #navigation ul li {
+        display: block;
+      }
+
+      #navigation ul li.level-1 > a {
+        padding-left: 1em;
+      }
+
+      #navigation ul li.level-2 > a {
+        padding-left: 2.5em;
+      }
+
+      #navigation ul li.level-3 > a {
+        padding-left: 4em;
+      }
+
+      #navigation ul li.level-4 > a {
+        padding-left: 5.5em;
+      }
+
+      #navigation ul li.level-5 > a {
+        padding-left: 7em;
+      }
+
+      #navigation ul li.level-6 > a {
+        padding-left: 8.5em;
+      }
+            
+      #navigation a {
+        display: block;
+        width: 100%;
+        padding: 0.3em 0.5em;
+      }
+
+      #navigation a:hover {
+        background: #4183c4;
+        color: #fff;
+        text-decoration: none;
+      }
+        
+      @media (min-width: 1024px) {
+        #navigation {
+          display: block;
+        }
+      }
     </style>
   </head>
   <body>
-    {{ content }}
+    <layout>
+      <row>
+        <column id="navigation" cols="12" cols-1680="3" cols-1024="4" cols-768="12"></column>
+        <column id="content" cols="12" cols-1680="9" cols-1024="8" cols-768="12">
+          {{ content }}
+        </column>
+      </row>
+    </layout>
 
-    <script src="template/default.js"></script>
+    <script>
+    /*
+
+      Table of Contents
+      -----
+
+    */
+    (function(){
+      "use strict";
+
+      var html = '', level = 0,
+        navigation = document.createElement('nav'),
+        // The placeholder can be element, like `document.body` for instance
+        placeholder = document.getElementById('navigation');
+
+      [].forEach.call(document.querySelectorAll('h1, h2, h3, h4, h5, h6'), function(header){
+        if (header.id && header.id !== 'undefined') {
+          /*
+            Build Navigation markup
+          */
+          var current = header.tagName.substring(1);
+
+          if (current > level) {
+            html += '<ul class="level-' + current + '">';
+          } else if (current === level) {
+            html += '</li>';
+          } else {
+            html += '</li></ul></li>';
+          }
+          html += '<li class="level-' + current + '"><a href="#' + header.id + '">' + header.innerText + '</a>';
+          level = current;
+
+          /*
+            Add anchor to all header with proper id
+          */
+          var anchor = document.createElement('a');
+
+          anchor.href = '#' + header.id;
+          anchor.innerHTML = header.innerHTML;
+          header.innerHTML = '';
+          header.appendChild(anchor);
+        }
+      });
+
+      html += '</li></ul>';
+      navigation.innerHTML = html;
+      // This appends the navigation in the placeholder
+      placeholder.insertBefore(navigation,placeholder.firstChild);
+    })();
+    </script>
   </body>
 </html>
