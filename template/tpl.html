@@ -578,32 +578,33 @@
         placeholder = document.getElementById('navigation');
 
       [].forEach.call(document.querySelectorAll('h1, h2, h3, h4, h5, h6'), function(header){
-        if (header.id && header.id !== 'undefined') {
-          /*
-            Build Navigation markup
-          */
-          var current = header.tagName.substring(1);
-
-          if (current > level) {
-            html += '<ul class="level-' + current + '">';
-          } else if (current === level) {
-            html += '</li>';
-          } else {
-            html += '</li></ul></li>';
-          }
-          html += '<li class="level-' + current + '"><a href="#' + header.id + '">' + header.innerText + '</a>';
-          level = current;
-
-          /*
-            Add anchor to all header with proper id
-          */
-          var anchor = document.createElement('a');
-
-          anchor.href = '#' + header.id;
-          anchor.innerHTML = header.innerHTML;
-          header.innerHTML = '';
-          header.appendChild(anchor);
+        if (header.id === '' || header.id === 'undefined') {
+            header.id = header.innerText.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
         }
+        /*
+          Build Navigation markup
+        */
+        var current = header.tagName.substring(1);
+
+        if (current > level) {
+          html += '<ul class="level-' + current + '">';
+        } else if (current === level) {
+          html += '</li>';
+        } else {
+          html += '</li></ul></li>';
+        }
+        html += '<li class="level-' + current + '"><a href="#' + header.id + '">' + header.innerText + '</a>';
+        level = current;
+
+        /*
+          Add anchor to all header with proper id
+        */
+        var anchor = document.createElement('a');
+
+        anchor.href = '#' + header.id;
+        anchor.innerHTML = header.innerHTML;
+        header.innerHTML = '';
+        header.appendChild(anchor);
       });
 
       html += '</li></ul>';
