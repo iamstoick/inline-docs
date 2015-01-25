@@ -29,7 +29,7 @@ var defaultGlobs = [
   '**/*.{md,markdown}',
   '**/*.js',
   '**/*.html',
-  '**/*.css',
+  '**/*.{css,sass,scss,less,styl}',
 
   //> exclude node_modules
   '!**/node_modules/**'
