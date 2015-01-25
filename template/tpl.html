@@ -190,7 +190,7 @@
         max-height: 100%;
         width: 100%;
       }
-        
+
       @media (min-width: 768px) {
         layout {
           font-size: 1rem;
@@ -237,7 +237,7 @@
         height: initial;
         max-height: initial;
       }
-        
+
       layout column[cols="1"] {
         width: 8.33333%;
       }
@@ -419,7 +419,7 @@
         border-bottom: 1px solid #ddd;
         padding: 2em 0 2.7em;
       }
-        
+
         @media (min-width: 1024px) {
           section {
             padding: 2em 2em 2.7em;
@@ -532,7 +532,7 @@
       #navigation ul li.level-6 > a {
         padding-left: 8.5em;
       }
-            
+
       #navigation a {
         display: block;
         width: 100%;
@@ -544,7 +544,7 @@
         color: #fff;
         text-decoration: none;
       }
-        
+
       @media (min-width: 1024px) {
         #navigation {
           display: block;
@@ -572,6 +572,10 @@
     (function(){
       "use strict";
 
+      function getHeadingId (raw) {
+        return raw.toLowerCase().replace(/[^\w]+/g, '-');
+      }
+
       var html = '', level = 0,
         navigation = document.createElement('nav'),
         // The placeholder can be element, like `document.body` for instance
@@ -579,12 +583,13 @@
 
       [].forEach.call(document.querySelectorAll('h1, h2, h3, h4, h5, h6'), function(header){
         if (header.id === '' || header.id === 'undefined') {
-            header.id = header.innerText.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+            header.id = getHeadingId(header.innerHTML);
         }
         /*
           Build Navigation markup
         */
         var current = header.tagName.substring(1);
+        var headerText = header.innerText || header.textContent;
 
         if (current > level) {
           html += '<ul class="level-' + current + '">';
@@ -593,7 +598,7 @@
         } else {
           html += '</li></ul></li>';
         }
-        html += '<li class="level-' + current + '"><a href="#' + header.id + '">' + header.innerText + '</a>';
+        html += '<li class="level-' + current + '"><a href="#' + header.id + '">' + headerText  + '</a>';
         level = current;
 
         /*
