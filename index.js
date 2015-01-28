@@ -80,6 +80,10 @@ module.exports = function (opts) {
     //> prepend a directive so that the generated file is *not* included the next time we run `inline-docs`
     outStream.write('<!--\n/* inline-docs:ignore */\n-->');
 
+    //> insert the generated date
+    var generatedDate = (new Date()).toISOString();
+    templateParts[0] = templateParts[0].replace('<html', '<html data-generated="' + generatedDate + '"');
+
     //> write the template header
     outStream.write(templateParts[0]);
   }
