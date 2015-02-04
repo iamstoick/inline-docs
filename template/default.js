@@ -16,6 +16,8 @@
       init: function() {
         buildLayout();
         iterateHeaders();
+        updateFloatingHeader();
+        contentColumn.onscroll = updateFloatingHeader;
       }
     };
 
@@ -70,6 +72,11 @@
         // > Check header level hierarchy to build the markup
         currentLevel = header.tagName.substring(1);
 
+        //
+        if (currentLevel == 1) {
+          floatingHeaders(header);
+        }
+
         if (currentLevel > parentLevel) {
           navigationMarkup += "<ul class='level-" + currentLevel + "'>";
         } else if (currentLevel === parentLevel) {
@@ -108,6 +115,43 @@
       anchor.innerHTML = header.innerHTML;
       header.innerHTML = "";
       header.appendChild(anchor);
+    }
+
+    /*
+      floatingHeaders(header)
+      -----
+    */
+    function floatingHeaders(header) {
+      var headerClone = header.cloneNode(true);
+
+      headerClone.id = "";
+      headerClone.classList.add("floating");
+      header.parentNode.insertBefore(headerClone, header.nextSibling);
+    }
+
+    /*
+      updateFloatingHeader()
+      -----
+    */
+    function updateFloatingHeader() {
+      [].forEach.call(document.getElementsByTagName("section"), function(section) {
+        var scrollTop = contentColumn.scrollTop,
+            offsetTop = section.offsetTop,
+            offsetHeight = section.offsetHeight,
+            floatingElement = section.getElementsByClassName("floating")[0],
+            sectionPaddingTop = parseInt(window.getComputedStyle(section, null).getPropertyValue('padding-top')),
+            sectionPaddingBottom = parseInt(window.getComputedStyle(section, null).getPropertyValue('padding-bottom'));
+
+        if (floatingElement) {
+          if ((scrollTop > offsetTop) && (scrollTop < offsetTop + (offsetHeight - sectionPaddingTop - sectionPaddingBottom))) {
+            floatingElement.style.visibility = "visible";
+            floatingElement.style.top = Math.min(scrollTop - offsetTop, offsetHeight - floatingElement.offsetHeight) - sectionPaddingTop - 1 + "px";
+          } else {
+            floatingElement.style.visibility = "hidden";
+            floatingElement.style.top = "0";
+          }
+        }
+      });
     }
 
   })();

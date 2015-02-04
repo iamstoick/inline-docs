@@ -142,6 +142,77 @@
 
 <div class="source-ref">Source: <a href="./index.js#L118">/index.js, line 118</a></div></article>
 </section>
+<section data-filename="/template/default.js">
+<article data-line="1">
+<h1 id="template-script">Template Script</h1><p>This script builds all functionality on the top of the content created by inline-docs.</p>
+
+<div class="source-ref">Source: <a href="./template/default.js#L1">/template/default.js, line 1</a></div></article>
+<article data-line="24">
+<h2 id="template-script:building-the-layout">Building the layout</h2><p>Markup of the layout:</p>
+<pre><code>&lt;layout&gt;
+  &lt;row&gt;
+    &lt;column class=&quot;navigation&quot;&gt;&lt;/column&gt;
+    &lt;column class=&quot;content&quot;&gt;&lt;/column&gt;
+  &lt;row&gt;
+&lt;layout&gt;
+</code></pre>
+<div class="source-ref">Source: <a href="./template/default.js#L24">/template/default.js, line 24</a></div></article>
+<article data-line="44">
+<blockquote>
+<p>Wrap the content created by inline-docs with the template markup</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./template/default.js#L44">/template/default.js, line 44</a></div></article>
+<article data-line="55">
+<h2 id="template-script:iterate-headers">Iterate headers</h2><p>Look for <code>h1</code>, <code>h2</code>, <code>h3</code>, <code>h4</code>, <code>h5</code> and <code>h6</code> elements inside content.</p>
+
+<div class="source-ref">Source: <a href="./template/default.js#L55">/template/default.js, line 55</a></div></article>
+<article data-line="69">
+<blockquote>
+<p>Trigger addAnchor(header)</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./template/default.js#L69">/template/default.js, line 69</a></div></article>
+<article data-line="72">
+<blockquote>
+<p>Check header level hierarchy to build the markup</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./template/default.js#L72">/template/default.js, line 72</a></div></article>
+<article data-line="88">
+<blockquote>
+<p>Include current level link</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./template/default.js#L88">/template/default.js, line 88</a></div></article>
+<article data-line="96">
+<blockquote>
+<p>Include the navigation markup</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./template/default.js#L96">/template/default.js, line 96</a></div></article>
+<article data-line="101">
+<h2 id="template-script:add-anchor-to-all-header-with-proper-id">Add anchor to all header with proper id</h2>
+<div class="source-ref">Source: <a href="./template/default.js#L101">/template/default.js, line 101</a></div></article>
+<article data-line="108">
+<blockquote>
+<p>If the header don&#39;t have an Id, create one</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./template/default.js#L108">/template/default.js, line 108</a></div></article>
+<article data-line="113">
+<blockquote>
+<p>Wrap the header in the anchor</p>
+</blockquote>
+
+<div class="source-ref">Source: <a href="./template/default.js#L113">/template/default.js, line 113</a></div></article>
+<article data-line="120">
+<h2 id="template-script:floatingheaders-header-">floatingHeaders(header)</h2>
+<div class="source-ref">Source: <a href="./template/default.js#L120">/template/default.js, line 120</a></div></article>
+<article data-line="132">
+<h2 id="template-script:updatefloatingheader-">updateFloatingHeader()</h2>
+<div class="source-ref">Source: <a href="./template/default.js#L132">/template/default.js, line 132</a></div></article>
+</section>
 <section data-filename="/bin/inline-docs.js">
 <article data-line="3">
 <h1 id="command-line-interface">Command line interface</h1><p>Example:</p>
@@ -411,71 +482,6 @@ so we can use a generic approach to extracting comments.</p>
 <p>This will be run as part of <code>npm test</code>.</p>
 
 <div class="source-ref">Source: <a href="./tests/parse-directives.js#L1">/tests/parse-directives.js, line 1</a></div></article>
-</section>
-<section data-filename="/template/default.js">
-<article data-line="1">
-<h1 id="template-script">Template Script</h1><p>This script builds all functionality on the top of the content created by inline-docs.</p>
-
-<div class="source-ref">Source: <a href="./template/default.js#L1">/template/default.js, line 1</a></div></article>
-<article data-line="22">
-<h2 id="template-script:building-the-layout">Building the layout</h2><p>Markup of the layout:</p>
-<pre><code>&lt;layout&gt;
-  &lt;row&gt;
-    &lt;column class=&quot;navigation&quot;&gt;&lt;/column&gt;
-    &lt;column class=&quot;content&quot;&gt;&lt;/column&gt;
-  &lt;row&gt;
-&lt;layout&gt;
-</code></pre>
-<div class="source-ref">Source: <a href="./template/default.js#L22">/template/default.js, line 22</a></div></article>
-<article data-line="42">
-<blockquote>
-<p>Wrap the content created by inline-docs with the template markup</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="./template/default.js#L42">/template/default.js, line 42</a></div></article>
-<article data-line="53">
-<h2 id="template-script:iterate-headers">Iterate headers</h2><p>Look for <code>h1</code>, <code>h2</code>, <code>h3</code>, <code>h4</code>, <code>h5</code> and <code>h6</code> elements inside content.</p>
-
-<div class="source-ref">Source: <a href="./template/default.js#L53">/template/default.js, line 53</a></div></article>
-<article data-line="67">
-<blockquote>
-<p>Trigger addAnchor(header)</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="./template/default.js#L67">/template/default.js, line 67</a></div></article>
-<article data-line="70">
-<blockquote>
-<p>Check header level hierarchy to build the markup</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="./template/default.js#L70">/template/default.js, line 70</a></div></article>
-<article data-line="81">
-<blockquote>
-<p>Include current level link</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="./template/default.js#L81">/template/default.js, line 81</a></div></article>
-<article data-line="89">
-<blockquote>
-<p>Include the navigation markup</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="./template/default.js#L89">/template/default.js, line 89</a></div></article>
-<article data-line="94">
-<h2 id="template-script:add-anchor-to-all-header-with-proper-id">Add anchor to all header with proper id</h2>
-<div class="source-ref">Source: <a href="./template/default.js#L94">/template/default.js, line 94</a></div></article>
-<article data-line="101">
-<blockquote>
-<p>If the header don&#39;t have an Id, create one</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="./template/default.js#L101">/template/default.js, line 101</a></div></article>
-<article data-line="106">
-<blockquote>
-<p>Wrap the header in the anchor</p>
-</blockquote>
-
-<div class="source-ref">Source: <a href="./template/default.js#L106">/template/default.js, line 106</a></div></article>
 </section>
 <section data-filename="/template/tpl.html">
 <article data-line="4">
