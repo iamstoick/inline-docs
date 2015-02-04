@@ -13,13 +13,613 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <link rel="stylesheet" href="./template/default.css">
+    <style>
+    /*
+
+      Default styles
+      ----
+
+      All of the default styles are embedded in the template, to avoid extra http requests and make
+      distribution easier.
+
+    */
+    html {
+      box-sizing: border-box;
+      height: 100%;
+      max-height: 100%;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, Sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      word-wrap: break-word;
+      margin: 0;
+      height: inherit;
+      max-height: inherit;
+    }
+
+    p {
+      margin: 0 0 1em;
+    }
+
+    a {
+      color: #4183c4;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus,
+    a:active {
+      text-decoration: underline;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1.1;
+      margin: 2em 0 0.5em;
+    }
+
+    h1 {
+      padding-bottom: 0.3em;
+      font-size: 2.25em;
+      line-height: 1.2;
+      border-bottom: 1px solid #eee;
+    }
+
+    h2 {
+      padding-bottom: 0.3em;
+      font-size: 1.75em;
+      line-height: 1.225;
+      border-bottom: 1px solid #eee;
+    }
+
+    h3 {
+      font-size: 1.5em;
+      line-height: 1.43;
+    }
+
+    h4 {
+      font-size: 1.25em;
+    }
+
+    h5 {
+      font-size: 1em;
+    }
+
+    h6 {
+      font-size: 1em;
+      color: #777;
+    }
+
+    h1 a, h1 a:hover,
+    h2 a, h2 a:hover,
+    h3 a, h3 a:hover,
+    h4 a, h4 a:hover,
+    h5 a, h5 a:hover,
+    h6 a, h6 a:hover {
+      color: #000;
+      text-decoration: none;
+    }
+
+    h1 a:hover:after,
+    h2 a:hover:after,
+    h3 a:hover:after,
+    h4 a:hover:after,
+    h5 a:hover:after,
+    h6 a:hover:after {
+      content: ' #';
+      color: #999;
+    }
+
+    hr {
+      height: 1px;
+      border: none;
+      background: #ccc;
+      width: 90%;
+    }
+
+    blockquote {
+      font-style: italic;
+      border-left: 0.6em solid #EEE;
+      padding: 0 0 0 1em;
+      margin: 0 0 1em;
+    }
+
+    blockquote > :first-child {
+      margin-top: 0;
+    }
+
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
+
+    pre {
+      /*> code blocks longer than section max width will scroll */
+      overflow-x: auto;
+      padding: 1em;
+      background: #eee;
+      border-radius: 5px;
+      margin: 0 0 1em;
+    }
+
+    code {
+      font-size: 1em;
+      line-height: 1.7;
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      word-wrap: normal;
+      color: #333;
+    }
+
+    pre code {
+      font-size: 0.9em;
+      line-height: 1.4;
+      padding: 0;
+    }
+
+    ul,
+    ol {
+      padding: 0 0 0 1.2em;
+      margin: 0 0 1em;
+    }
+
+
+    /*
+    Article and Section
+    -----
+    */
+    section {
+      margin: 0 1em 2px;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 2em 0 2.7em;
+    }
+
+    @media (min-width: 1024px) {
+      section {
+        padding: 2em 2em 2.7em;
+      }
+    }
+
+    section article {
+      margin: 0 0 1.5em;
+      position: relative;
+    }
+
+    section article {
+      width: 100%;
+    }
+
+    section article h1 {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    section article h1.floating {
+      position: absolute;
+      top: 0;
+      left: 0;
+      visibility: hidden;
+      width: 100%;
+      background: #fff;
+      padding-top: 1rem;
+      z-index: 9;
+    }
+
+    section article:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    section article img {
+      width: auto;
+      max-width: 100%;
+    }
+
+    section article p,
+    section article ul,
+    section article blockquote {
+      width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+      section article p,
+      section article ul,
+      section article blockquote {
+        max-width: 38rem;
+      }
+    }
+
+    @media (min-width: 1680px) {
+      section article p,
+      section article ul,
+      section article blockquote {
+        max-width: 48rem;
+      }
+    }
+
+    section article .source-ref {
+      padding: 0 0 1em 0;
+      font-size: 0.8em;
+      font-style: italic;
+      color: #999;
+    }
+
+    section article .source-ref a {
+      color: #999;
+      text-decoration: none;
+    }
+
+    section article .source-ref a:hover {
+      text-decoration: underline;
+    }
+
+    /* // > Target animation. When click on any link with anchor placeholder (#), this will highlight the target anchor. */
+    section article h1:target,
+    section article h2:target,
+    section article h3:target,
+    section article h4:target,
+    section article h5:target,
+    section article h6:target {
+      -webkit-animation: highlight 1s ease;
+              animation: highlight 1s ease;
+    }
+
+    @-webkit-keyframes highlight {
+      from {
+        background: #FDFFA2;
+      }
+
+      to {
+        background: white;
+      }
+    }
+
+    @keyframes highlight {
+      from {
+        background: #FDFFA2;
+      }
+
+      to {
+        background: white;
+      }
+    }
+
+
+    /*
+    Layout tag
+    -----
+
+    `<layout>` here is the element that wraps a bunch of rows and columns
+
+    */
+    layout {
+      position: relative;
+      display: block;
+      font-size: 0.9rem;
+      height: 100%;
+      max-height: 100%;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      layout {
+        font-size: 1rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      layout {
+        font-size: 1rem;
+      }
+    }
+
+    @media print {
+      layout {
+        height: auto;
+      }
+    }
+
+    layout row {
+      position: relative;
+      display: block;
+      height: inherit;
+      max-height: inherit;
+    }
+
+    layout:before,
+    layout:after,
+    layout row:before,
+    layout row:after {
+      content: " ";
+      display: table;
+    }
+
+    layout:after,
+    layout row:after {
+      clear: both;
+    }
+
+    layout column {
+      position: relative;
+      display: block;
+      float: left;
+      overflow-y: auto;
+      height: 100%;
+      max-height: 100%;
+    }
+
+    /*
+    ### Navigation column
+    */
+    layout column.navigation {
+      display: none;
+      background: #efefef;
+      border-right: 5px solid #dfdfdf;
+    }
+
+    layout column.navigation ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    layout column.navigation ul li {
+      display: block;
+    }
+
+    layout column.navigation ul li.level-1 > a {
+      padding-left: 1em;
+    }
+
+    layout column.navigation ul li.level-2 > a {
+      padding-left: 2.5em;
+    }
+
+    layout column.navigation ul li.level-3 > a {
+      padding-left: 4em;
+    }
+
+    layout column.navigation ul li.level-4 > a {
+      padding-left: 5.5em;
+    }
+
+    layout column.navigation ul li.level-5 > a {
+      padding-left: 7em;
+    }
+
+    layout column.navigation ul li.level-6 > a {
+      padding-left: 8.5em;
+    }
+
+    layout column.navigation a {
+      display: block;
+      width: 100%;
+      padding: 0.3em 0.5em;
+    }
+
+    layout column.navigation a:hover {
+      background: #4183c4;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    @media (min-width: 1024px) {
+      layout column.navigation {
+        display: block;
+        width: 300px;
+        max-width: 300px;
+      }
+    }
+
+    @media (min-width: 1680px) {
+      layout column.navigation {
+        width: 400px;
+        max-width: 400px;
+      }
+    }
+
+    /*
+    ### Content column
+    */
+    layout column.content {
+      width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+      layout column.content {
+        width: calc(100% - 300px);
+        max-width: calc(100% - 300px);
+      }
+    }
+
+    @media (min-width: 1680px) {
+      layout column.content {
+        width: calc(100% - 400px);
+        max-width: calc(100% - 400px);
+      }
+    }
+    </style>
   </head>
   <body>
     <div>
       {{ content }}
     </div>
 
-    <script type="text/javascript" src="./template/default.js"></script>
+    <script type="text/javascript">
+    /*
+      Template Script
+      =====
+
+      This script builds all functionality on the top of the content created by inline-docs.
+    */
+    (function( global ) {
+      "use strict";
+
+      var InlineDocs = (function() {
+
+        var contentColumn,
+            navigationColumn;
+
+        return {
+          init: function() {
+            buildLayout();
+            iterateHeaders();
+            updateFloatingHeader();
+            contentColumn.onscroll = updateFloatingHeader;
+          }
+        };
+
+        /*
+          Building the layout
+          -----
+
+          Markup of the layout:
+
+          ```
+          <layout>
+            <row>
+              <column class="navigation"></column>
+              <column class="content"></column>
+            <row>
+          <layout>
+
+          ```
+        */
+        function buildLayout() {
+          var layout = document.createElement("layout"),
+              content = document.body.firstElementChild;
+
+          // > Wrap the content created by inline-docs with the template markup
+          layout.innerHTML = "<row>"
+                           + "<column class='navigation'></column>"
+                           + "<column class='content'></column>"
+                           + "</row>";
+          document.body.firstElementChild.remove();
+          document.body.insertBefore(layout, document.body.firstChild);
+          contentColumn = document.querySelectorAll("column.content")[0];
+          contentColumn.appendChild(content);
+        }
+
+        /*
+          Iterate headers
+          -----
+
+          Look for `h1`, `h2`, `h3`, `h4`, `h5` and `h6` elements inside content.
+        */
+        function iterateHeaders() {
+          var parentLevel = 0,
+              navigationMarkup = "";
+
+          [].forEach.call(contentColumn.querySelectorAll("h1, h2, h3, h4, h5, h6"), function(header) {
+            var currentLevel,
+                headerText;
+
+            // > Trigger addAnchor(header)
+            addAnchor(header);
+
+            // > Check header level hierarchy to build the markup
+            currentLevel = header.tagName.substring(1);
+
+            //
+            if (currentLevel == 1) {
+              floatingHeaders(header);
+            }
+
+            if (currentLevel > parentLevel) {
+              navigationMarkup += "<ul class='level-" + currentLevel + "'>";
+            } else if (currentLevel === parentLevel) {
+              navigationMarkup += "</li>";
+            } else {
+              navigationMarkup += "</li></ul></li>";
+            }
+
+            // > Include current level link
+            headerText = header.innerText || header.textContent;
+            navigationMarkup += "<li class='level-" + currentLevel + "'><a href='#" + header.id + "'>" + headerText  + "</a>";
+            parentLevel = currentLevel;
+          });
+
+          navigationMarkup += '</li></ul>';
+
+          // > Include the navigation markup
+          navigationColumn = document.querySelectorAll("column.navigation")[0];
+          navigationColumn.innerHTML = navigationMarkup;
+        }
+
+        /*
+          Add anchor to all header with proper id
+          -----
+        */
+        function addAnchor(header) {
+          var anchor = document.createElement("a");
+
+          // > If the header don't have an Id, create one
+          if (header.id === "" || header.id === "undefined") {
+              header.id = header.innerHTML.toLowerCase().replace(/[^\w]+/g, "-");
+          }
+
+          // > Wrap the header in the anchor
+          anchor.href = "#" + header.id;
+          anchor.innerHTML = header.innerHTML;
+          header.innerHTML = "";
+          header.appendChild(anchor);
+        }
+
+        /*
+          floatingHeaders(header)
+          -----
+        */
+        function floatingHeaders(header) {
+          var headerClone = header.cloneNode(true);
+
+          headerClone.id = "";
+          headerClone.classList.add("floating");
+          header.parentNode.insertBefore(headerClone, header.nextSibling);
+        }
+
+        /*
+          updateFloatingHeader()
+          -----
+        */
+        function updateFloatingHeader() {
+          [].forEach.call(document.getElementsByTagName("section"), function(section) {
+            var scrollTop = contentColumn.scrollTop,
+                offsetTop = section.offsetTop,
+                offsetHeight = section.offsetHeight,
+                floatingElement = section.getElementsByClassName("floating")[0],
+                sectionPaddingTop = parseInt(window.getComputedStyle(section, null).getPropertyValue('padding-top')),
+                sectionPaddingBottom = parseInt(window.getComputedStyle(section, null).getPropertyValue('padding-bottom'));
+
+            if (floatingElement) {
+              if ((scrollTop > offsetTop) && (scrollTop < offsetTop + (offsetHeight - sectionPaddingTop - sectionPaddingBottom))) {
+                floatingElement.style.visibility = "visible";
+                floatingElement.style.top = Math.min(scrollTop - offsetTop, offsetHeight - floatingElement.offsetHeight) - sectionPaddingTop - 1 + "px";
+              } else {
+                floatingElement.style.visibility = "hidden";
+                floatingElement.style.top = "0";
+              }
+            }
+          });
+        }
+
+      })();
+
+      global.InlineDocs = InlineDocs;
+      InlineDocs.init();
+
+    })( this );
+    </script>
   </body>
 </html>
