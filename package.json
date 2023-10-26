@@ -10,7 +10,7 @@
     "example": "examples"
   },
   "dependencies": {
-    "cdocparser": "^0.8.0",
+    "cdocparser": "^0.15.0",
     "glob-stream": "^3.1.15",
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
