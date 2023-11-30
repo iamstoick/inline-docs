@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "cdocparser": "^0.8.0",
-    "glob-stream": "^3.1.15",
+    "glob-stream": "^8.0.0",
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "minimist": "^1.1.0",
