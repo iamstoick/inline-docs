@@ -12,7 +12,7 @@
   "dependencies": {
     "cdocparser": "^0.8.0",
     "glob-stream": "^3.1.15",
-    "lodash": "^2.4.1",
+    "lodash": "^4.17.17",
     "marked": "^0.3.2",
     "minimist": "^1.1.0",
     "through2": "^0.6.3"
